@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+  <script>
+    function validate() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const loginButton = document.getElementById("loginButton");
+      loginButton.disabled = !(email && password);
+    }
+  </script>
+</head>
+<body>
+  <h1>Login</h1>
+<form th:action="@{/auth/authenticate}" method="post">
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" oninput="validate()">
+
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" oninput="validate()">
+  </div>
+  <div>
+    <button type="submit" id="loginButton" disabled>Login</button>
+  </div>
+  <div>
+    <a href="/oauth2/authorization/google">
+      Login With Google
+    </a>
+  </div>
+</form>
+</body>
+</html>

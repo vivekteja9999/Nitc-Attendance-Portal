@@ -25,11 +25,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**")
+                .requestMatchers("/auth/**","/resources/**")
                 .permitAll()
+                .requestMatchers("/users/**").authenticated()
                 .anyRequest()
                 .authenticated()
         );
+        http.oauth2Login(oauth2 -> oauth2
+                .loginPage("/auth/login")
+                .defaultSuccessUrl("/users")
+                .permitAll()
+                );
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
         http.authenticationProvider(authenticationProvider);
