@@ -17,7 +17,10 @@ The **Classroom & Cycle Management System** is a web application designed to str
   - Scan QR codes to borrow and return cycles.
 - **Notifications System**:
   - Real-time alerts for approvals, denials, and reminders.
-
+### Figma Link
+  ```sh
+  https://www.figma.com/design/kzvZpA1pxBfAT34u2tNxFb/ClassroomKeyAndCycleManagement?node-id=0-1&t=SvFtkMCfCCYPj0x3-1
+  ```
 ## Tech Stack
 ### Frontend
 - React.js
