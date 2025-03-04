@@ -1,6 +1,7 @@
 package com.example.ckcm.controller;
 
 import com.example.ckcm.auth.AuthenticationRequest;
+import com.example.ckcm.auth.AuthenticationResponse;
 import com.example.ckcm.auth.RegisterRequest;
 import com.example.ckcm.entities.User;
 import com.example.ckcm.services.AuthenticationService;
@@ -36,13 +37,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public String authenticate(@ModelAttribute AuthenticationRequest request, Model model) {
-        try {
-            var response = authenticationService.authenticate(request);
-            return "redirect:/users?token=" + response.getToken();
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "login";
-        }
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request, Model model) {
+        var response = authenticationService.authenticate(request);
+        return response;
     }
 }

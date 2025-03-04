@@ -5,8 +5,8 @@
 }
 
 .header {
-  background-color: white;
-  color: black;
+  background-color: #e1e3e2;
+  color: #000000;
   text-align: center;
   padding: 5px 0;
   margin: 0;
@@ -27,8 +27,8 @@
 }
 
 .logo {
-  width: 75px;
-  height: auto;
+  width: 60px;
+  height: 60px;
 }
 
 .title {

@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="content_container">
+  <div class="welcome_text">WELCOME TO CLASSROOM KEY & CYCLE MANAGEMENT SYSTEM</div>
+
+  <div class="login_box">
+    <div class="user_login">
+      <p>USER LOGIN</p>
+    </div>
+
+    <form class="secondhalf">
+      <div class="input_field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username">
+      </div>
+
+      <div class="input_field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+      </div>
+
+      <div class="links">
+        <a href="#">Are you an admin?</a>
+        <a href="#">Not a User? Register Here</a>
+      </div>
+
+      <div class="login_button">
+        <button type="submit">LOGIN</button>
+      </div>
+
+      <div class="google_login" (click)="loginWithGoogle()">
+        <button>Sign in with Google</button>
+      </div>
+    </form>
+  </div>
+</div>
