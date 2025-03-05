@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<div class="dashboard">
+  <h2>User Dashboard</h2>
+  
+  <div class="resources">
+    <h3>Available Resources</h3>
+    <ul>
+      <li *ngFor="let resource of availableResources">
+        {{ resource.name }} 
+        <button (click)="requestResource(resource)">Request</button>
+      </li>
+    </ul>
+  </div>
+</div>

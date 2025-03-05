@@ -107,7 +107,7 @@ public class SecurityConfiguration {
                 String token = jwtService.generateToken(user);
 
                 // Redirect to /users with the token as a query parameter
-                response.sendRedirect("/users?token=" + token);
+                response.sendRedirect("http://localhost:4200?token=" + token);
             }
         };
     }
