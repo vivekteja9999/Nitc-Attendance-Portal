@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
-
+<div class="body">
 <div class="content_container">
   <div class="welcome_text">WELCOME TO CLASSROOM KEY & CYCLE MANAGEMENT SYSTEM</div>
 
   <div class="login_box">
     <div class="user_login">
-      <p>USER LOGIN</p>
+      <p>ADMIN LOGIN</p>
     </div>
 
     <form class="secondhalf">
@@ -19,18 +19,19 @@
         <input type="password" id="password" name="password" required placeholder="Enter your password">
       </div>
 
-      <div class="links">
-        <a href="#">Are you an admin?</a>
-        <a href="#">Not a User? Register Here</a>
-      </div>
-
       <div class="login_button">
         <button type="submit">LOGIN</button>
       </div>
-
+      <div class="student_login">
+        <p class="student_login_name">STUDENT LOGIN</p>
+      </div>
       <div class="google_login" (click)="loginWithGoogle()">
-        <button>Sign in with Google</button>
+        <div class="google_icon">
+        <img src="assets/images/google_icon.ico" alt="google_icon">
+        </div>
+        <button class="btn btn-secondary">Sign in with Google</button>
       </div>
     </form>
   </div>
+</div>
 </div>

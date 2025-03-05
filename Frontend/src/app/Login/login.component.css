@@ -2,12 +2,14 @@
   box-sizing: border-box;
 }
 
-body {
-  background-image: url("../../assets/images/nitc_home_page_bg.png");
+.body {
+  background-image: url('https://nitc.ac.in/imgserver/uploads/attachments/pcm__e42b57b0-f75c-49e0-b216-af06df656faf_0.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
+  margin:0;
+  background-color: #4285F4;
 }
 
 .content_container {
@@ -15,12 +17,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   margin-top: 100px;
-  position:relative;
-  background-color: transparent;
 }
-
 
 .welcome_text {
   font-size: x-large;
@@ -29,11 +28,11 @@ body {
 }
 
 .login_box {
-  margin-top: 2px;
-  background-color: #e8e8e8;
+  margin-top: 20px;
+  background-color: white;
   height: 380px;
   width: 400px;
-  border-radius: 20px;
+  border-radius: 5%;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
   padding: 20px;
   display: flex;
@@ -42,7 +41,7 @@ body {
 }
 
 .user_login p {
-  color: blue;
+  color:red;
   font-size: large;
   font-weight: bold;
   text-align: center;
@@ -70,20 +69,6 @@ body {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  color: #e8e8e8;
-}
-
-.links {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-}
-
-.links a {
-  font-size: 14px;
-  text-decoration: none;
-  color: blue;
 }
 
 .login_button {
@@ -95,23 +80,51 @@ body {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: blue;
+  background-color: red;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.google_login {
-  text-align: center;
+.student_login {
   width: 100%;
 }
 
+.student_login_name {
+  color: blue;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.google_login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; 
+}
+
+.google_icon {
+  background-color: white; 
+  padding: 5px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+  cursor: pointer;
+}
+
+.google_icon img {
+  width: 26px;
+  height: 26px;
+}
+
 .google_login button {
-  width:60%;
   padding: 10px;
   font-size: 16px;
-  background-color:#4285F4;
+  background-color: #4285F4;
   color: white;
   border: none;
   border-radius: 5px;
