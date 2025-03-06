@@ -3,9 +3,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { AuthService } from '../auth/auth.service';
 import {Router} from '@angular/router';
 import { WindowService } from '../window.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-homepage',
-  imports: [NavbarComponent],
+  imports: [NavbarComponent,FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username,this.password).subscribe(
       {
         next: (data) =>{
+          console.log(this.authService.getToken());
           this.authService.saveUserData(data.token, data.role);
           this.redirectUser(data.role);
         },

@@ -1,37 +1,37 @@
 <app-navbar></app-navbar>
-<div class="body">
-<div class="content_container">
-  <div class="welcome_text">WELCOME TO CLASSROOM KEY & CYCLE MANAGEMENT SYSTEM</div>
+  <div class="content_container">
+    <div class="welcome_text">WELCOME TO CLASSROOM KEY & CYCLE MANAGEMENT SYSTEM</div>
 
-  <div class="login_box">
-    <div class="user_login">
-      <p>ADMIN LOGIN</p>
-    </div>
-
-    <form class="secondhalf">
-      <div class="input_field">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required placeholder="Enter your username">
+    <div class="login_box">
+      <div class="user_login">
+        <p>ADMIN LOGIN</p>
       </div>
 
-      <div class="input_field">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required placeholder="Enter your password">
-      </div>
+      <form class="secondhalf" (ngSubmit)="login()">
+        <div class="input_field">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" [(ngModel)]="username" required placeholder="Enter your username">
+        </div>
 
-      <div class="login_button">
-        <button type="submit">LOGIN</button>
-      </div>
+        <div class="input_field">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password" required placeholder="Enter your password">
+        </div>
+
+        <div class="login_button">
+          <button type="submit" class="btn btn-primary">LOGIN</button>
+        </div>
+      </form>
+
       <div class="student_login">
         <p class="student_login_name">STUDENT LOGIN</p>
       </div>
-      <div class="google_login" (click)="loginWithGoogle()">
+
+      <div class="google_login">
         <div class="google_icon">
-        <img src="assets/images/google_icon.ico" alt="google_icon">
+          <img src="assets/images/google_icon.ico" alt="Google Icon">
         </div>
-        <button class="btn btn-secondary">Sign in with Google</button>
+        <button type="button" class="btn btn-secondary" (click)="loginWithGoogle()">Sign in with Google</button>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>

@@ -6,5 +6,5 @@ import { UserDashboardComponent } from './dashboards/user-dashboard/user-dashboa
 
 export const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path:'user-dashboard', component: UserDashboardComponent},
+  {path:'user-dashboard', component: UserDashboardComponent,canActivate: [AuthGuard]},
 ];

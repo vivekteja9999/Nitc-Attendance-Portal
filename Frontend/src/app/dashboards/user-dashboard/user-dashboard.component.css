@@ -1,0 +1,25 @@
+/* Ensure body and HTML take full screen without margins */
+
+/* Make the container fill the entire screen */
+.dashboard {
+  width: 100vw; /* Full width of viewport */
+  height: 100vh; /* Full height of viewport */
+  display: flex;
+  flex-direction: column; /* Center content vertically */ /* Center content horizontally */
+  background-color: #A9D0FF;
+}
+
+
+/* Header Fix */
+h1 {
+  font-family: 'Kadwa', serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* Button styling */
+.btn {
+  border-radius: 8px;
+}

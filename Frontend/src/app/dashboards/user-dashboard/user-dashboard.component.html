@@ -1,14 +1,18 @@
-<app-navbar></app-navbar>
-<div class="dashboard">
-  <h2>User Dashboard</h2>
-  
-  <div class="resources">
-    <h3>Available Resources</h3>
-    <ul>
-      <li *ngFor="let resource of availableResources">
-        {{ resource.name }} 
-        <button (click)="requestResource(resource)">Request</button>
-      </li>
-    </ul>
+<body class="bg-light">
+  <app-navbar></app-navbar> <!-- Navbar inside body -->
+
+  <div class="container mt-5 pt-5"> <!-- Added pt-5 to push content down -->
+    <div class="dashboard card shadow p-4">
+      <h1 class="text-center">Welcome, {{ firstName }} {{ lastName }} !!!</h1>
+      <div>
+        <h4>Allocated Resources</h4>
+        <ul class="list-group">
+          <li>Cycle 1</li>
+        </ul>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-danger px-4 py-2" (click)="logout()">Logout</button>
+      </div>
+    </div>
   </div>
-</div>
+</body>
