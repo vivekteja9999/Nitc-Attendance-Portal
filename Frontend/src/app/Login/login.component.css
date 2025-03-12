@@ -35,6 +35,7 @@ html, body {
   text-align: center;
   margin-top: 75px;
   padding: 10px;
+  color: #fff;
 }
 
 /* Login Box Styling */
@@ -151,7 +152,6 @@ html, body {
   white-space: nowrap;
 }
 
-/* 📱 Responsive Styles */
 @media (max-width: 768px) {
   .content_container {
     padding-top: 100px; /* Increase padding for smaller screens */

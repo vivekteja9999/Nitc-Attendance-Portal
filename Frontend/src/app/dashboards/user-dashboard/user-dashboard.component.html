@@ -1,18 +1,30 @@
 <body class="bg-light">
-  <app-navbar></app-navbar> <!-- Navbar inside body -->
+  <app-navbar-loggedin></app-navbar-loggedin> <!-- Navbar inside body -->
 
-  <div class="container mt-5 pt-5"> <!-- Added pt-5 to push content down -->
-    <div class="dashboard card shadow p-4">
-      <h1 class="text-center">Welcome, {{ firstName }} {{ lastName }} !!!</h1>
-      <div>
-        <h4>Allocated Resources</h4>
-        <ul class="list-group">
-          <li>Cycle 1</li>
-        </ul>
-      </div>
-      <div class="text-center mt-4">
-        <button class="btn btn-danger px-4 py-2" (click)="logout()">Logout</button>
-      </div>
+  <div class="container-fluid p-0 m-0 pt-1"><!-- Added Bootstrap container for responsiveness -->
+    <div class="dashboard d-flex flex-column align-items-center">
+      <h1 class="text-center welcome_text">Welcome, {{ firstName }} {{ lastName }} !!!</h1>
+
+      <div class="row w-100 justify-content-center mt-4"> 
+        <!-- Available Cycles Section -->
+        <div class="col-md-6 col-sm-12">
+          <h4 class="Allocated-h text-center">Allocated Resources</h4>
+          <ul class="list-group allocated-cycles mx-auto">
+            <li *ngFor="let cycle of availableCycles" 
+                class="list-group-item d-flex justify-content-between align-items-center">
+              {{ cycle.cycleId }}
+              <button class="btn btn-primary btn-sm">Borrow</button>
+            </li>
+          </ul>
+        </div> 
+
+        <!-- Button Section -->
+        <div class="col-md-4 col-sm-12 d-flex flex-column align-items-center mt-3 button-div">
+          <button type="button" class="btn btn-primary w-100 mb-2">Send Request</button>
+          <button type="button" class="btn btn-success w-100 mb-2">View Request</button>
+          <button type="button" class="btn btn-danger w-100">Return Cycle</button>
+        </div>
+      </div> 
     </div>
   </div>
 </body>

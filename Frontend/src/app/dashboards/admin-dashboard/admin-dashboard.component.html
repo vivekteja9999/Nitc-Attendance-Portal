@@ -1,0 +1,64 @@
+<body class="bg-light">
+  <app-navbar-loggedin></app-navbar-loggedin>
+  <div class="container-fluid dashboard-container">
+    <!-- Dashboard Title -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="dashboard-title">DASHBOARD</h2>
+      </div>
+    </div>
+  
+    <!-- Dashboard Cards -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="dashboard-card">
+          <h4 class="card-title text-primary">KEYS</h4>
+          <ul>
+            <li>ELHC 403 ALLOCATED TO USER 2.</li>
+            <li>ELHC 402 IS BORROWED BY USER1 FROM USER 3.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dashboard-card">
+          <h4 class="card-title text-success">CYCLES</h4>
+          <ul>
+            <li>ELHC 403 ALLOCATED TO USER 2.</li>
+            <li>ELHC 402 IS BORROWED BY USER1 FROM USER 3.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Cycle Data Form -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="cycle-data-card">
+          <h4 class="text-danger">GET CYCLE DATA</h4>
+          <div class="input-group mt-3">
+            <input type="text" class="form-control" placeholder="Cycle Number/Name">
+            <span class="input-group-text"><i class="fa-solid fa-bicycle"></i></span>
+          </div>
+          <button class="btn btn-warning mt-3 w-100">
+            DOWNLOAD QR <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Action Buttons -->
+      <div class="col-md-6">
+        <div class="action-buttons">
+          <button class="btn btn-danger w-100  edit">
+            <i class="fa-solid fa-edit"></i> Edit User Details 
+          </button>
+          <button class="btn btn-primary w-100 mt-2 classroom">
+            Register a Classroom Key
+          </button>
+          <button class="btn btn-success w-100 mt-2 cycle" (click)="navigateToCycleRegistrationForm()">
+            Register a Cycle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>

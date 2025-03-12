@@ -1,0 +1,24 @@
+<body>
+  <app-navbar-loggedin></app-navbar-loggedin>
+  <div class="container-fluid">
+    <div class="registration-card">
+      <h2>CYCLE REGISTRATION</h2>
+      <form (ngSubmit)="registerCycle()">
+        <label for="cycleNumber">Cycle Number</label>
+        <input type="text" id="cycleNumber" [(ngModel)]="cycleId" name="cycleNumber" required placeholder="Cycle Number/Name"/>
+  
+        <label for="location">Location</label>
+        <input type="text" id="location" [(ngModel)]="location" name="location" required placeholder="Enter cycle Location"/>
+        <label for="gearType">Cycle Type</label>
+        <select id="gearType" [(ngModel)]="gearType" name="gearType" required>
+          <option value="" disabled selected>Select Gear Type</option>
+          <option value="Gear">Gear</option>
+          <option value="Non-Gear">Non-Gear</option>
+        </select>
+        <button type="submit" class="generate-btn">
+          GENERATE QR <i class="fa-solid fa-qrcode"></i>
+        </button>
+      </form>
+    </div>
+  </div>  
+</body>

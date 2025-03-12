@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap');
+@import 'ngx-toastr/toastr';
 body{
   margin:0 !important;
   padding:0 !important;

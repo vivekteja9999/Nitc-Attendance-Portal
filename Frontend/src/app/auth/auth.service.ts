@@ -9,6 +9,7 @@ import {isPlatformBrowser} from '@angular/common';
 import {PLATFORM_ID} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {throwError} from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +22,7 @@ export class AuthService{
     }
     return null;
   }
-  constructor(private http: HttpClient, private router: Router,private windowService:WindowService,@Inject(PLATFORM_ID) private platformId: Object){}
+  constructor(private http: HttpClient, private router: Router,private windowService:WindowService,@Inject(PLATFORM_ID) private platformId: Object,private toast:ToastrService){}
   login(email: string, password: string): Observable<any> {
     return this.http.post(this.loginApiUrl, { email, password }).pipe(
       tap((response: any) => {
@@ -48,10 +49,13 @@ export class AuthService{
       const role = this.getRoleFromUrl(window);
       if (token && role) {
         this.saveUserData(token, role);
+        this.toast.success("Successfully Logged in!!");
       // Redirect based on role
       if (role.toLowerCase() === 'admin') {
         this.router.navigate(['/admin-dashboard']);
-      } else {
+      }else if(role.toLowerCase() === "cr"){
+        this.router.navigate(['/cr-dashboard'])
+      }else {
         this.router.navigate(['/user-dashboard']);
       }
       }
@@ -97,7 +101,14 @@ export class AuthService{
     localStorage.setItem('token', token); 
     localStorage.setItem('role', role);   
   }
+  getRole(): string | null{
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('role'); // ✅ Only access localStorage in the browser
+    }
+    return "";
+  }
   logout() {
+    this.toast.success("You have been Logged out!!")
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.router.navigate(['/']);

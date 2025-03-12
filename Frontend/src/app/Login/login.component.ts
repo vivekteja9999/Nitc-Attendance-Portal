@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import {Router} from '@angular/router';
 import { WindowService } from '../window.service';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-homepage',
   imports: [NavbarComponent,FormsModule],
@@ -15,17 +16,22 @@ export class LoginComponent implements OnInit {
   password: string = '';
   error_message: string = '';
 
-  constructor(private authService: AuthService, private router: Router,private windowService: WindowService) {}
+  constructor(private authService: AuthService, private router: Router,private windowService: WindowService,private toast:ToastrService) {}
   login(){
     this.authService.login(this.username,this.password).subscribe(
       {
         next: (data) =>{
           console.log(this.authService.getToken());
           this.authService.saveUserData(data.token, data.role);
+          if(data.role !== "ADMIN"){
+            this.toast.error("Only Admins can use this login!!!")
+            this.router.navigate(["/"]);
+          }
+          this.toast.success("You have successfully Logged in!!");
           this.redirectUser(data.role);
         },
         error: (error) => {
-          this.error_message = error.error.message;
+          this.toast.error("Invalid Username or Password!!");
         }
       }
     )
