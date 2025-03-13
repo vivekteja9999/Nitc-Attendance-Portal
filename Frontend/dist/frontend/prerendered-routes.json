@@ -1,6 +1,10 @@
 {
   "routes": {
     "/": {},
+    "/admin-dashboard": {},
+    "/cr-dashboard": {},
+    "/cycles/register": {},
+    "/keys/register": {},
     "/user-dashboard": {}
   }
 }
