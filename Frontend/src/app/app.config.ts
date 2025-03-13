@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()),importProvidersFrom(BrowserModule,FormsModule,HttpClientModule,RouterModule),AuthGuard,provideAnimations(),provideToastr(
     {
       timeOut: 5000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton:true,
       progressBar:true,

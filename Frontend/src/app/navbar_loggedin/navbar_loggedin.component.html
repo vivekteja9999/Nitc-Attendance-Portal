@@ -32,7 +32,7 @@
   <button type="button" class="btn-close" aria-label="Close" (click)="toggleSidenav()"></button>
   <ul class="list-unstyled ps-3">
       <li *ngFor="let item of menuItems">
-          <a class="nav-link" [routerLink]="item.route">
+          <a class="nav-link" (click)="handleMenuClick(item)">
               <i [class]="item.icon"></i> {{ item.title }}
           </a>
       </li>

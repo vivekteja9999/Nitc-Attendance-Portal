@@ -21,11 +21,12 @@
   z-index: 1050;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  cursor: pointer;
 }
 
 .sidenav.show {
   width: 260px;
-  padding-left: 20px;
+  padding-left: 2px;
 }
 
 /* 📌 Sidenav List Styling */
@@ -44,7 +45,7 @@
 .sidenav ul li a {
   display: flex;
   align-items: center;
-  padding: 14px 20px;
+  padding: 14px 5px;
   text-decoration: none;
   font-size: 17px;
   font-weight: 600;
@@ -72,7 +73,7 @@
 .sidenav ul li a:hover {
   background-color: #f0f2f5;
   border-color: #ccc;
-  padding-left: 24px;
+  padding-left: 5px;
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -112,7 +113,9 @@
 
 /* 🌟 Navbar Styling */
 .navbar {
-  background: linear-gradient(to right, #e3e4e5, #f1f3f4);
+  background: rgba(255, 255, 255, 0.7); /* Glass effect */
+  backdrop-filter: blur(10px); /* Blurred background */
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
   color: #000;
   width: 100%;
   position: fixed;
@@ -123,7 +126,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
 }
 
 /* Navbar Content */
@@ -200,16 +204,17 @@
 /* 🌟 Dropdown Styling */
 .dropdown-menu {
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0;
-  background: rgba(240, 240, 240, 0.95);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
   display: none;
   padding: 12px;
   min-width: 180px;
-  backdrop-filter: blur(10px);
   transition: all 0.3s ease-in-out;
+  z-index: 1100;
 }
 
 .dropdown-menu.show {
@@ -238,8 +243,31 @@
 /* 🌟 Profile Button */
 .profile-button {
   position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out;
+}
+.profile-button:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
+/* 🖼️ Profile Image */
+.profile-button img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-button:hover img {
+  transform: scale(1.05);
+}
 /* 📱 Ensuring content starts below navbar */
 body {
   padding-top: 75px;
@@ -254,5 +282,20 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .profile-button {
+    padding: 6px;
+  }
+
+  .profile-button img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dropdown-menu {
+    right: -20px;
+    min-width: 160px;
   }
 }

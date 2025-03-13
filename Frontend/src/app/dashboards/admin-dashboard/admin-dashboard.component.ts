@@ -12,4 +12,7 @@ export class AdminDashboardComponent {
   navigateToCycleRegistrationForm(){
     this.router.navigate(["/cycles/register"]);
   }
+  navigateToKeyRegistrationForm(){
+    this.router.navigate(["/keys/register"])
+  }
 }

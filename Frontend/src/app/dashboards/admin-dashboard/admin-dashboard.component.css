@@ -15,6 +15,10 @@
 .classroom{
   background-color: #9747FF;
 }
+.classroom:hover{
+  transform: translateY(-4px); /* Slight lift */
+  box-shadow: 0px 8px 16px rgba(224, 48, 255, 0.06);
+}
 /* Dashboard Cards */
 .dashboard-card {
   background: white;
@@ -47,19 +51,49 @@
   text-align: center;
 }
 
-/* Action Buttons */
+/* 🎯 Action Buttons - Smooth Hover Effects */
 .action-buttons button {
   font-size: 16px;
   padding: 10px;
   border-radius: 10px;
   width: 200px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
-.edit{
+
+/* Edit Button */
+.edit {
   background-color: #FF3B30;
 }
-.cycle{
+
+.edit:hover {
+  transform: translateY(-4px); /* Slight lift */
+  box-shadow: 0px 8px 16px rgba(255, 59, 48, 0.3);
+}
+
+/* Cycle Button */
+.cycle {
   background-color: #16A34A;
 }
+
+.cycle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 16px rgba(22, 163, 74, 0.3);
+}
+
+/* General Hover Animation */
+.action-buttons button:hover {
+  opacity: 0.95;
+}
+
+/* Subtle Click Effect */
+.action-buttons button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .dashboard-title {

@@ -13,7 +13,7 @@ import {RouterModule} from '@angular/router'
   styleUrl: './navbar_loggedin.component.css'
 })
 export class NavbarLoggedComponent implements OnInit {
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService,private router:Router){}
   isSidenavOpen = false;
   isProfileOpen = false;
   menuItems:any[] = [];
@@ -21,6 +21,13 @@ export class NavbarLoggedComponent implements OnInit {
     const role = this.authService.getRole() as keyof typeof MENU_ITEMS;
     if(role !== null){
       this.menuItems = MENU_ITEMS[role] || MENU_ITEMS.USER;
+    }
+  }
+  handleMenuClick(item: any) {
+    if (item.action === 'logout') {
+      this.logout();
+    } else if (item.route) {
+      this.router.navigate([item.route]);
     }
   }
    toggleSidenav(){
