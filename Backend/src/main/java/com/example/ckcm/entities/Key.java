@@ -1,5 +1,4 @@
 package com.example.ckcm.entities;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +16,8 @@ public class Key {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false,unique = true)
     private String keyId;
-    @Column(nullable = false,unique = true)
-    private String Location;
+    private String location;
     private String status="Available";
     private String borrowedBy;
     @Temporal(TemporalType.TIMESTAMP)

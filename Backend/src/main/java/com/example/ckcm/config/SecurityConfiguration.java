@@ -9,22 +9,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Configuration
@@ -33,42 +44,66 @@ import java.util.Optional;
 public class SecurityConfiguration {
 
     @Autowired
-    private JwtAuthenticationFilter jwtAuthFilter;
-
-    @Autowired
     private AuthenticationProvider authenticationProvider;
-
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthFilter;
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private UserRepository userRepository; // Inject UserRepository
+    private UserRepository userRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/resources/**").permitAll()
-                .requestMatchers("/users/**").authenticated()
+                .requestMatchers("/auth/login", "/auth/authenticate").permitAll()  // Allow authentication APIs
+                .requestMatchers("/user/**").authenticated()  // Protect user details API
                 .anyRequest().authenticated()
         );
 
+        // Ensure the backend returns 401 instead of redirecting on unauthorized requests
+        http.exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("{\"error\": \"Unauthorized\"}");
+                })
+        );
+
         // OAuth2 Login configuration
-        http.oauth2Login(oauth2 -> oauth2.loginPage("/auth/login")
+        http.oauth2Login(oauth2 -> oauth2
+                .loginPage("/auth/login")
                 .userInfoEndpoint(userInfo -> userInfo
                         .oidcUserService(new OidcUserService())
                         .userService(new DefaultOAuth2UserService()))
-                .successHandler(oAuth2LoginSuccessHandler()) // Custom success handler
+                .successHandler(oAuth2LoginSuccessHandler())
+                // Custom success handler
         );
 
-        // Enforce stateless session management
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
+        http.oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+        );
         http.authenticationProvider(authenticationProvider);
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Allow Angular frontend
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     // Custom OAuth2 success handler
@@ -81,34 +116,66 @@ public class SecurityConfiguration {
                     throws IOException, ServletException {
 
                 OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-                String email = oAuth2User.getAttribute("email");  // Extract email
-                String firstName = oAuth2User.getAttribute("given_name"); // First name
-                String lastName = oAuth2User.getAttribute("family_name"); // Last name
+                String email = oAuth2User.getAttribute("email");
+                String firstName = oAuth2User.getAttribute("given_name");
+                String lastName = oAuth2User.getAttribute("family_name");
 
-                // Check if user exists in DB
                 Optional<User> existingUser = userRepository.findByEmail(email);
-
                 User user;
                 if (existingUser.isEmpty()) {
-                    // Save new user
                     user = User.builder()
                             .firstName(firstName != null ? firstName : "OAuthUser")
                             .lastName(lastName != null ? lastName : "")
                             .email(email)
-                            .password("") // No password needed for OAuth users
-                            .role(Role.USER) // Default role
+                            .password("")
+                            .role(Role.USER)
                             .build();
                     userRepository.save(user);
                 } else {
                     user = existingUser.get();
                 }
 
-                // Generate JWT Token using your JwtService
+                // ✅ Generate JWT Token
                 String token = jwtService.generateToken(user);
 
-                // Redirect to /users with the token as a query parameter
-                response.sendRedirect("http://localhost:4200?token=" + token);
+                // ✅ Manually authenticate the user
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(user, null, List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+
+                // ✅ Store authentication in session for API access
+                request.getSession().setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+
+                // ✅ Forward request to Controller for redirection
+                response.sendRedirect("/auth/oauth2/success?token=" + token + "&role=" + user.getRole().name());
             }
         };
+    }
+
+
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200")); // Allow Angular frontend
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_"); // Add ROLE_ prefix to roles
+
+        JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
+        authenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return authenticationConverter;
+    }
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withSecretKey(jwtService.getSignInKey()).build();
     }
 }

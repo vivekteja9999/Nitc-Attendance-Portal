@@ -1,5 +1,4 @@
 package com.example.ckcm.repositories;
-
 import com.example.ckcm.entities.Key;
 import org.springframework.data.jpa.repository.JpaRepository;
 
