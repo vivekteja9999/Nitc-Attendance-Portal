@@ -1,0 +1,170 @@
+/* General Container Styling */
+.container {
+    margin-top: 80px;
+    max-width: 800px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .container:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Heading */
+  h2 {
+    color: #333;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  /* Search Bar */
+  input[type="text"] {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 12px;
+    font-size: 16px;
+    width: 90%;
+    box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.4);
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+  }
+  
+  button.btn-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: #fff;
+  }
+  
+  button.btn-primary:hover {
+    background: linear-gradient(45deg, #0056b3, #004199);
+    transform: scale(1.05);
+    box-shadow: 0px 5px 10px rgba(0, 91, 187, 0.3);
+  }
+  
+  button.btn-success {
+    background: linear-gradient(45deg, #28a745, #218838);
+    color: white;
+  }
+  
+  button.btn-success:hover {
+    background: linear-gradient(45deg, #218838, #19692c);
+    transform: scale(1.05);
+    box-shadow: 0px 5px 10px rgba(33, 136, 56, 0.3);
+  }
+  
+  button.btn-secondary {
+    background: linear-gradient(45deg, #6c757d, #5a6268);
+    color: white;
+  }
+  
+  button.btn-secondary:hover {
+    background: linear-gradient(45deg, #5a6268, #495057);
+    transform: scale(1.05);
+    box-shadow: 0px 5px 10px rgba(90, 98, 104, 0.3);
+  }
+  
+  /* Table Styling */
+  .table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+  
+  .table thead {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .table th, .table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  .table-striped tbody tr:hover {
+    background-color: #e3eaf3;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-weight: bold;
+  }
+  
+  /* No Users Found Message */
+  .text-danger {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #dc3545;
+  }
+  
+  /* Edit Role Section */
+  .mt-4 {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .mt-4:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  .mt-4 h4 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  select {
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  select:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+  
+  /* Buttons inside Edit Role */
+  button.mt-2 {
+    width: 100%;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: bold;
+  }
