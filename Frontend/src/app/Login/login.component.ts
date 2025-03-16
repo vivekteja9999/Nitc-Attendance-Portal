@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import { WindowService } from '../window.service';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   imports: [NavbarComponent,FormsModule],
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   error_message: string = '';
 
-  constructor(private authService: AuthService, private router: Router,private windowService: WindowService,private toast:ToastrService) {}
+  constructor(private authService: AuthService, private router: Router,private windowService: WindowService,private toast:ToastrService,private route:ActivatedRoute) {}
   login(){
     this.authService.login(this.username,this.password).subscribe(
       {
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
           this.redirectUser(data.role);
         },
         error: (error) => {
-          this.toast.error("Invalid Username or Password!!");
+          this.toast.error("Unable to login");
         }
       }
     )
@@ -41,6 +42,15 @@ export class LoginComponent implements OnInit {
   }  
   ngOnInit(){
     this.authService.handleAuthCallback();
+    this.route.queryParams.subscribe(params => {
+      this.error_message = params['error'] || '';
+      if(this.error_message!==""){
+        this.toast.error("Use Nitc Mail Id!!","",{timeOut:3000});
+        this.toast.clear();
+        this.error_message="";
+        this.router.navigate(["/"])
+      }
+    });
   }
   logout() {
     this.authService.logout();

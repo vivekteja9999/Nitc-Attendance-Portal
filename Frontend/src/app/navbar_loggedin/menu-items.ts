@@ -1,7 +1,7 @@
 export const MENU_ITEMS = {
   ADMIN: [
     { title: 'Dashboard', icon: 'fa-solid fa-house', route: '/admin-dashboard' },
-    { title: 'Users', icon: 'fa-solid fa-users', route: '/admin/users' },
+    { title: 'Users', icon: 'fa-solid fa-users', route: '/users/edit' },
     { title: 'Keys', icon: 'fa-solid fa-key', route: '/admin/keys' },
     { title: 'Cycles', icon: 'fa-solid fa-bicycle', route: '/admin/cycles' },
     {title:'View Requests',icon:"fa-solid fa-paper-plane",route:"/admin/requests"},

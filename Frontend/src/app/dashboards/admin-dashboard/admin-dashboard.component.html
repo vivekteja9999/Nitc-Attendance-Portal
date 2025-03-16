@@ -36,10 +36,10 @@
         <div class="cycle-data-card">
           <h4 class="text-danger">GET CYCLE DATA</h4>
           <div class="input-group mt-3">
-            <input type="text" class="form-control" placeholder="Cycle Number/Name">
+            <input type="text" class="form-control" placeholder="Cycle Number/Name" (input)="cycleId = ($event.target?.value || '')">
             <span class="input-group-text"><i class="fa-solid fa-bicycle"></i></span>
           </div>
-          <button class="btn btn-warning mt-3 w-100">
+          <button class="btn btn-warning mt-3 w-100" (click)="downloadQr()">
             DOWNLOAD QR <i class="fa-solid fa-download"></i>
           </button>
         </div>
@@ -48,7 +48,7 @@
       <!-- Action Buttons -->
       <div class="col-md-6">
         <div class="action-buttons">
-          <button class="btn btn-danger w-100  edit">
+          <button class="btn btn-danger w-100  edit" (click)="navigateToEditUserDetails()">
             <i class="fa-solid fa-edit"></i> Edit User Details 
           </button>
           <button class="btn btn-primary w-100 mt-2 classroom" (click)="navigateToKeyRegistrationForm()">

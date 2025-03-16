@@ -58,9 +58,9 @@ export class AuthService{
       }else {
         this.router.navigate(['/user-dashboard']);
       }
-      }
-    }
   }  
+}
+}
   getTokenFromUrl(window: Window): string | null {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('token');
