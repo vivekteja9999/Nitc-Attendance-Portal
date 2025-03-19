@@ -1,6 +1,7 @@
 package com.example.ckcm.controller;
 
 import com.example.ckcm.entities.Cycle;
+import com.example.ckcm.repositories.CycleRepository;
 import com.example.ckcm.services.CycleService;
 import com.example.ckcm.util.QrCodeGenerator;
 import com.google.zxing.WriterException;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -30,6 +32,8 @@ public class CycleController {
 
     @Autowired
     private QrCodeGenerator qrCodeGenerator;
+    @Autowired
+    private CycleRepository cycleRepository;
 
     // ✅ Register cycle and return QR code URL
     @PostMapping("/register")
@@ -56,5 +60,23 @@ public class CycleController {
         } catch (MalformedURLException e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllCycles() {
+        System.out.println(cycleService.getAll());
+        return ResponseEntity.ok(cycleService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cycle> getCycleById(@PathVariable String id) {
+        return cycleService.getCycleByCycleId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping("/delete/{cycleId}")
+    public ResponseEntity<?> deleteCycle(@PathVariable String cycleId){
+        cycleService.deleteCycle(cycleId);
+        return ResponseEntity.ok(Map.of("message", "Cycle deleted successfully"));
     }
 }
