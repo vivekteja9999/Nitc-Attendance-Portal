@@ -1,0 +1,90 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+<div class="container">
+  <h2 class="title"><i class="fas fa-bell"></i> Borrow Requests</h2>
+  <p class="subtitle">View and manage all cycle and key borrow requests</p>
+
+  <!-- Search, Filter, and Sort Controls -->
+  <div class="controls d-flex">
+    <input type="text" class="search-input" placeholder="Search by Email ID..." [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" />
+    <div class="sort-group d-flex flex-row">
+      <label>Sort by:</label>
+      <select [(ngModel)]="sortOrder" (change)="applyFilters()" class="form-select">
+        <option value="latest">Latest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Status and Item Type Filters -->
+  <div class="filter-container">
+    <div class="filter-group">
+      <label>Status:</label>
+      <button *ngFor="let status of ['All', 'Approved', 'Pending', 'Denied', 'Return Requested', 'Returned']"
+              class="filter-btn"
+              [ngClass]="{ 'active': selectedStatus === status }"
+              (click)="setFilter(status)">
+        {{ status }}
+      </button>
+    </div>
+
+    <div class="filter-group">
+      <label>Type:</label>
+      <button *ngFor="let type of ['All', 'Cycle', 'Key']"
+              class="filter-btn"
+              [ngClass]="{ 'active': selectedType === type }"
+              (click)="setTypeFilter(type)">
+        {{ type }}
+      </button>
+    </div>
+  </div>
+
+  <!-- No Requests Message -->
+  <div class="notification-box" *ngIf="filteredRequests.length === 0">
+    No borrow requests found.
+  </div>
+
+  <!-- Request Cards -->
+  <div class="request-list" *ngIf="filteredRequests.length > 0">
+    <div class="request-card" *ngFor="let request of filteredRequests">
+      <div class="request-header">
+        <i class="fas" [ngClass]="{'fa-bicycle': request.cycleId, 'fa-key': request.keyId}"></i>
+        <span class="item-name">
+          <strong>{{ request.cycleId ? 'Cycle ' + request.cycleId : 'Key ' + request.location + " " + request.keyId }}</strong>
+        </span>
+        <span class="status-badge" [ngClass]="{
+          'approved': request.status === 'Approved',
+          'pending': request.status === 'Pending',
+          'denied': request.status === 'Denied',
+          'return requested': request.status === 'Return Requested',
+          'returned': request.status === 'Returned'
+        }">
+          {{ request.status }}
+        </span>
+      </div>
+      <p class="request-message">
+        Request for {{ request.cycleId ? 'Cycle ' + request.cycleId : 'Key ' + request.location + " " + request.keyId }} by {{ request.borrowerEmail }}.
+      </p>
+      <p class="timestamp">Requested on: {{ request.requestTime | date:'medium' }}</p>
+      <p class="timestamp" *ngIf="request.keyId">Start Time : {{request.startTime}} To End Time : {{request.endTime}}</p>
+      <!-- Action Buttons for Pending Requests -->
+      <div class="actions" *ngIf="request.status === 'Pending'">
+        <button class="btn btn-danger" (click)="request.cycleId ? denyRequest(request.id) : denyKeyRequest(request.id)">
+          <i class="fas fa-times"></i> Deny
+        </button>
+        <button class="btn btn-success" (click)="request.cycleId ? approveRequest(request.id) : approveKeyRequest(request.id)">
+          <i class="fas fa-check"></i> Approve
+        </button>
+      </div>
+
+      <!-- Action Buttons for Return Requests -->
+      <div class="actions" *ngIf="request.status === 'Return Requested'">
+        <button class="btn btn-danger" (click)="request.cycleId ? denyReturnRequest(request.id) : denyReturnKeyRequest(request.id)">
+          <i class="fas fa-times"></i> Deny
+        </button>
+        <button class="btn btn-success" (click)="request.cycleId ? approveReturnRequest(request.id) : approveReturnKeyRequest(request.id)">
+          <i class="fas fa-check"></i> Approve
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
