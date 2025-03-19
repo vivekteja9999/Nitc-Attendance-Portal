@@ -27,7 +27,7 @@ export class AuthService{
     return this.http.post(this.loginApiUrl, { email, password }).pipe(
       tap((response: any) => {
         if (response.token && response.role) {
-          this.saveUserData(response.token, response.role);
+          this.saveUserData(response.token, response.role,response.email);
         }
       }),
       catchError(error => {
@@ -47,16 +47,17 @@ export class AuthService{
     if (window) {
       const token = this.getTokenFromUrl(window);
       const role = this.getRoleFromUrl(window);
-      if (token && role) {
-        this.saveUserData(token, role);
+      const email = this.getEmailFromUrl(window);
+      if (token && role && email) {
+        this.saveUserData(token, role,email);
         this.toast.success("Successfully Logged in!!");
       // Redirect based on role
       if (role.toLowerCase() === 'admin') {
-        this.router.navigate(['/admin-dashboard']);
+        this.router.navigate(['/admin/dashboard']);
       }else if(role.toLowerCase() === "cr"){
-        this.router.navigate(['/cr-dashboard'])
+        this.router.navigate(['/cr/dashboard'])
       }else {
-        this.router.navigate(['/user-dashboard']);
+        this.router.navigate(['/user/dashboard']);
       }
   }  
 }
@@ -68,6 +69,10 @@ export class AuthService{
   getRoleFromUrl(window: Window): string | null {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('role');
+  }
+  getEmailFromUrl(window: Window): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('email');
   }
   getUserDetails(): Observable<any> {
     const token = this.getToken();
@@ -97,9 +102,10 @@ export class AuthService{
     console.error("API Error:", error);
     return throwError(() => new Error(error.status === 401 ? "Unauthorized. Please log in again." : "Error fetching user details"));
   }
-  saveUserData(token: string, role: string){
+  saveUserData(token: string, role: string,email:string){
     localStorage.setItem('token', token); 
-    localStorage.setItem('role', role);   
+    localStorage.setItem('role', role);
+    localStorage.setItem('email', email);   
   }
   getRole(): string | null{
     if (isPlatformBrowser(this.platformId)) {
@@ -111,6 +117,7 @@ export class AuthService{
     this.toast.success("You have been Logged out!!")
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('email');
     this.router.navigate(['/']);
   }
 }

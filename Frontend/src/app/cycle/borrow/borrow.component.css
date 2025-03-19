@@ -1,0 +1,155 @@
+/* Global Styles */
+body {  
+  background-color: #A9D0FF;
+  width: 100vw;
+  height: 100vh;
+  max-height: fit-content;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+/* Responsive Container */
+.container {
+  max-width: 1200px;
+  max-height: 2000px;
+  width: 90%;
+  margin-top: 60px;
+}
+
+/* Header Styling */
+.container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #004AAD;
+  text-align: center;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  background: white;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Responsive Grid */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* QR Scanner & Input Styling */
+.input-group input {
+  border: 2px solid #004AAD;
+  border-radius: 10px 0 0 10px;
+  font-weight: bold;
+}
+
+.input-group-text {
+  background-color: #004AAD;
+  color: white;
+  border-radius: 0 10px 10px 0;
+  font-size: 16px;
+}
+
+/* QR Scanner Container */
+.scanner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 2px solid #004AAD;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons Styling */
+.btn-primary {
+  background-color: #004AAD;
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #003080;
+  transform: scale(1.03);
+}
+
+/* Scanner Cancel Button */
+.btn-danger {
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+.btn-danger:hover {
+  background-color: #B30000;
+  transform: scale(1.03);
+}
+
+/* Cycle List Styling */
+.list-group {
+  padding: 0;
+}
+
+.list-group-item {
+  transition: background 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+}
+
+.list-group-item:hover {
+  background: #E3F2FD;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 30px;
+  }
+
+  .container h2 {
+    font-size: 1.8rem;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .btn-primary, .btn-danger {
+    font-size: 14px;
+  }
+}

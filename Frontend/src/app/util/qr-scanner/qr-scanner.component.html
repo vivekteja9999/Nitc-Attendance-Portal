@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h2 class="text-center text-primary">Scan QR Code to Borrow Cycle</h2>
+
+  <zxing-scanner 
+    [formats]="['QR_CODE']" 
+    (scanSuccess)="onScanSuccess($event)">
+  </zxing-scanner>
+
+  <div *ngIf="scannedCycle" class="mt-3">
+    <h4>Cycle Details</h4>
+    <p><strong>Cycle ID:</strong> {{ scannedCycle.cycleId }}</p>
+    <p><strong>Location:</strong> {{ scannedCycle.location }}</p>
+
+    <button class="btn btn-success" (click)="borrowCycle()">Borrow Cycle</button>
+  </div>
+</div>

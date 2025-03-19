@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent {
-  cycleId:String = "";
+  cycleId:any = "";
   constructor(private router:Router,private cycleService:CycleService,private toast:ToastrService){}
   downloadQr(){
     if (!this.cycleId) {

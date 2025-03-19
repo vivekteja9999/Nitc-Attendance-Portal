@@ -36,7 +36,7 @@
         <div class="cycle-data-card">
           <h4 class="text-danger">GET CYCLE DATA</h4>
           <div class="input-group mt-3">
-            <input type="text" class="form-control" placeholder="Cycle Number/Name" (input)="cycleId = ($event.target?.value || '')">
+            <input type="text" class="form-control" placeholder="Cycle Number/Name" [(ngModel)]="cycleId">
             <span class="input-group-text"><i class="fa-solid fa-bicycle"></i></span>
           </div>
           <button class="btn btn-warning mt-3 w-100" (click)="downloadQr()">

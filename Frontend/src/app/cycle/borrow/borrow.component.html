@@ -1,0 +1,64 @@
+<body>
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="container p-5">
+  <h2 class="text-center fw-bold text-uppercase text-primary">Cycle Management</h2>
+
+  <div class="row justify-content-center mt-4">
+    <!-- Left: Cycle Request Form -->
+    <div class="col-md-5">
+      <div class="card p-4 shadow-lg border-0 rounded-4">
+        <h4 class="text-center text-primary fw-bold">Cycle Request Form</h4>
+        <hr>
+
+        <!-- QR Code Scanner Button -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Scan QR Code</label>
+          <div class="input-group">
+            <input type="text" class="form-control rounded-start" placeholder="Scan QR Code" [(ngModel)]="scannedCycleId" readonly>
+            <button class="btn btn-outline-primary rounded-end" (click)="toggleScanner()">
+              <i class="fa-solid fa-camera"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- QR Code Scanner (Shown when isScannerActive is true) -->
+        <div *ngIf="isScannerActive" class="text-center mt-3">
+          <div class="scanner-container p-3 border border-primary rounded-3 bg-light">
+            <zxing-scanner (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
+            <button class="btn btn-danger mt-2 w-100 rounded-3" (click)="toggleScanner()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Cycle Number Input -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Cycle Number:</label>
+          <div class="input-group">
+            <input type="text" class="form-control rounded-start" placeholder="Cycle Number" [(ngModel)]="scannedCycleId" readonly>
+            <span class="input-group-text rounded-end bg-primary text-white">
+              <i class="fa-solid fa-bicycle"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Request Button -->
+        <button class="btn btn-primary w-100 fw-bold rounded-3 shadow-sm" (click)="requestBorrow()">🚲 Request Borrow</button>
+      </div>
+    </div>
+
+    <!-- Right: Available Cycles -->
+    <div class="col-md-5">
+      <div class="card p-4 shadow-lg border-0 rounded-4">
+        <h4 class="text-primary fw-bold text-center">Available Cycles</h4>
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex align-items-center" *ngFor="let cycle of availableCycles">
+            <i class="fa-solid fa-bicycle text-success me-2"></i> Cycle - {{ cycle.cycleId }} at {{cycle.location}}
+          </li>
+        </ul>
+        <p *ngIf="availableCycles.length === 0" class="text-muted text-center mt-3">No available cycles</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

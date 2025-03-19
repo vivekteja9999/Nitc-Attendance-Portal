@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       {
         next: (data) =>{
           console.log(this.authService.getToken());
-          this.authService.saveUserData(data.token, data.role);
+          this.authService.saveUserData(data.token, data.role,this.username);
           if(data.role !== "ADMIN"){
             this.toast.error("Only Admins can use this login!!!")
             this.router.navigate(["/"]);
@@ -57,13 +57,13 @@ export class LoginComponent implements OnInit {
   }
   redirectUser(role: string){
     if(role === 'USER'){
-      this.router.navigate(['/user-dashboard']);
+      this.router.navigate(['/user/dashboard']);
     }
     else if(role === 'ADMIN'){
-      this.router.navigate(['/admin-dashboard']);
+      this.router.navigate(['/admin/dashboard']);
     }
     else if(role === 'CR'){
-      this.router.navigate(['/cr-dashboard']);
+      this.router.navigate(['/cr/dashboard']);
   }
 }
 }

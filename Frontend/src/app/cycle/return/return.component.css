@@ -1,0 +1,213 @@
+/* Global Styles */
+body {  
+  background-color: #A9D0FF;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+/* Container Styling */
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin-top: 60px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Header Styling */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FF3B30;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: white;
+  padding: 20px;
+  max-width: 500px;
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Input Styling */
+.input-group {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group input {
+  border: 1px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 12px;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #FF3B30;
+  box-shadow: 0 0 6px rgba(0, 64, 173, 0.6);
+}
+
+.input-group-text {
+  background-color: #FF3B30;
+  color: white;
+  border-radius: 0 10px 10px 0;
+  font-size: 16px;
+  padding: 10px 16px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.input-group-text:hover {
+  background: #FF3B30;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* QR Scanner Container */
+.scanner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px solid #FF3B30;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Button Styling */
+.btn-primary, .btn-danger {
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background-color: #FF3B30;
+}
+
+.btn-primary:hover {
+  background-color: #FF3B30;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+  background-color: #FF3B30;
+}
+
+.btn-danger:hover {
+  background-color: #B30000;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Cycle List Styling */
+.list-group-item {
+  transition: background 0.3s ease, transform 0.2s;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  background: #F5F5F5;
+  margin-bottom: 8px;
+}
+
+.list-group-item:hover {
+  background: #E3F2FD;
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+/* Scanned Cycle ID Display */
+.scanned-info {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+  color: #004AAD;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 30px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .btn-primary, .btn-danger {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .scanned-info {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,67 @@
+<body>
+  <app-navbar-loggedin></app-navbar-loggedin>
+  <div class="container">
+    <h2 class="title"><i class="fas fa-bell"></i> Your Borrow Requests</h2>
+    <p class="subtitle">Check the status of your borrow requests for cycles and keys.</p>
+
+    <!-- Search and Filter Controls -->
+    <div class="controls d-flex">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search by Request ID or Email..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="applyFilters()"
+      />
+
+      <div class="sort-group d-flex flex-row">
+        <label class="align-content-center">Sort by:</label>
+        <select [(ngModel)]="sortOrder" (change)="applyFilters()" class="form-select">
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+
+      <div class="filter-group d-flex">
+        <label class="align-content-center">Status:</label>
+        <select id="statusFilter" class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Denied">Denied</option>
+          <option value="Return Requested">Return Requested</option>
+          <option value="Returned">Returned</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- No Requests Message -->
+    <div class="notification-box" *ngIf="filteredRequests.length === 0">
+      No borrow requests found.
+    </div>
+
+    <!-- Request List -->
+    <ul class="notification-list" *ngIf="filteredRequests.length > 0">
+      <li *ngFor="let request of filteredRequests" 
+          class="request-item"
+          [ngClass]="{
+            'approved': request.status === 'Approved',
+            'pending': request.status === 'Pending',
+            'denied': request.status === 'Denied',
+            'return-requested': request.status === 'Return Requested',
+            'returned': request.status === 'Returned'
+          }">
+        <div class="request-header">
+          <i class="fas" 
+             [ngClass]="request.type === 'cycle' ? 'fa-bicycle' : 'fa-key'">
+          </i>
+          <span class="request-name">
+            {{ request.type === 'cycle' ? 'Cycle' : 'Key' }} {{ request.type === 'cycle' ? request.cycleId : request.location+ " " + request.keyId }}
+          </span>
+          <span class="status-badge">{{ request.status }}</span>
+        </div>
+        <p class="timestamp">Requested on: {{ request.requestTime | date:'medium' }}</p>
+      </li>
+    </ul>
+  </div>
+</body>

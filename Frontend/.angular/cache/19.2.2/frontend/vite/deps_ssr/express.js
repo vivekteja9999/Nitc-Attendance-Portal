@@ -15785,11 +15785,7 @@ var require_get_intrinsic = __commonJS({
             if (!allowMissing) {
               throw new $TypeError("base intrinsic for " + name + " exists, but the property is not available.");
             }
-<<<<<<< HEAD:Frontend/.angular/cache/19.2.2/frontend/vite/deps_ssr/express.js
             return void undefined2;
-=======
-            return void 0;
->>>>>>> bcb71de54e07ecfbbe9ee6a2b38a19e3aa49905a:Frontend/.angular/cache/19.2.0/frontend/vite/deps_ssr/express.js
           }
           if ($gOPD && i + 1 >= parts.length) {
             var desc = $gOPD(value, part);

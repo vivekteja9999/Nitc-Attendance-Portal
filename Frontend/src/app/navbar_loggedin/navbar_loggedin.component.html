@@ -1,40 +1,70 @@
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="navbar-content">
+    <div class="navbar-content">
       <!-- Hamburger Button -->
       <button class="hamburger" (click)="toggleSidenav()" title="Toggle Menu" aria-label="Toggle navigation">
-          <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars"></i>
       </button>
-
+  
       <!-- Logo -->
       <div class="logo-container">
-          <img src="assets/images/nitc_logo.png" alt="NITC Logo" class="logo">
-          <p class="title">NATIONAL INSTITUTE OF TECHNOLOGY CALICUT</p>
+        <img src="assets/images/nitc_logo.png" alt="NITC Logo" class="logo">
+        <p class="title">NATIONAL INSTITUTE OF TECHNOLOGY CALICUT</p>
       </div>
+  
+<!-- Notifications -->
+<div class="dropdown notification-container">
+  <button class="btn notification-btn not-but" (click)="toggleNotifications()" aria-label="Notifications">
+    <i class="fa-solid fa-bell"></i>
+    <span class="badge-success" *ngIf="isNotificationsOpen === false && unReadCount > 0">
+      {{ unReadCount }}
+    </span>
+  </button>
 
-      <!-- Profile Dropdown -->
-      <div class="profile-button btn-group">
-          <button type="button" class="btn dropdown-toggle" (click)="toggleProfileDropdown()" aria-haspopup="true" aria-expanded="false">
-              <i class="fa-solid fa-user"></i>
-          </button>
-          <div class="dropdown-menu" [class.show]="isProfileOpen">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item btn btn-danger px-4 py-2" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
-          </div>
-      </div>
+  <!-- Notification Dropdown -->
+  <div class="dropdown-menu notification-menu" [class.show]="isNotificationsOpen">
+    <div class="notification-header">
+      <span class="text-bold">Notifications</span>
+      <button type="button" *ngIf="notifications.length > 0" (click)="clearNotifications()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <p *ngIf="notifications.length === 0" class="dropdown-item text-muted">No new notifications</p>
+    
+    <a *ngFor="let notification of notifications" class="dropdown-item" (click)="navigateToRequestView()">
+      📢 {{ notification }}
+    </a>
   </div>
-</nav>
-
-<!-- Sidenav -->
-<div id="sidenav" class="sidenav" [class.show]="isSidenavOpen">
-  <button type="button" class="btn-close" aria-label="Close" (click)="toggleSidenav()"></button>
-  <ul class="list-unstyled ps-3">
-      <li *ngFor="let item of menuItems">
-          <a class="nav-link" (click)="handleMenuClick(item)">
-              <i [class]="item.icon"></i> {{ item.title }}
-          </a>
-      </li>
-  </ul>
 </div>
+
+  
+      <!-- Profile Dropdown -->
+      <div class="dropdown profile-container">
+        <button class="btn dropdown-toggle profile-btn" (click)="toggleProfileDropdown()" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-user"></i>
+        </button>
+        <div class="dropdown-menu" [class.show]="isProfileOpen">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">Settings</a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item btn btn-danger" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Sidenav -->
+  <div id="sidenav" class="sidenav" [class.show]="isSidenavOpen">
+    <button type="button" class="btn-close" aria-label="Close" (click)="toggleSidenav()"></button>
+    <ul class="list-unstyled ps-3">
+      <li *ngFor="let item of menuItems">
+        <a class="nav-link" (click)="handleMenuClick(item)">
+          <i [class]="item.icon"></i> {{ item.title }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  

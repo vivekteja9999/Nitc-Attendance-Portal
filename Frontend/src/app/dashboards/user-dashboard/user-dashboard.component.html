@@ -19,9 +19,9 @@
 
         <!-- Button Section -->
         <div class="col-md-4 col-sm-12 d-flex flex-column align-items-center mt-3 button-div">
-          <button type="button" class="btn btn-primary w-100 mb-2">Send Request</button>
-          <button type="button" class="btn btn-success w-100 mb-2">View Request</button>
-          <button type="button" class="btn btn-danger w-100">Return Cycle</button>
+          <button type="button" class="btn btn-primary w-100 mb-2" (click)="navigateToBorrowCycle()">Send Request</button>
+          <button type="button" class="btn btn-success w-100 mb-2" (click)="navigateToViewRequest()">View Request</button>
+          <button type="button" class="btn btn-danger w-100" (click)="navigateToReturnCycle()">Return Cycle</button>
         </div>
       </div> 
     </div>

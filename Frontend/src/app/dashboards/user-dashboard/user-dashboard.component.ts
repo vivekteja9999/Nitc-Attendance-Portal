@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
 import { NavbarLoggedComponent } from "../../navbar_loggedin/navbar_loggedin.component";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Router} from "@angular/router"
 @Component({
   selector: 'app-user-dashboard',
   standalone: true, // ✅ Use standalone component
@@ -18,7 +19,7 @@ export class UserDashboardComponent implements OnInit {
   availableCycles: any[] = [];
   borrowedCycles: any[] = [];
 
-  constructor(private authService: AuthService, private http: HttpClient) {}
+  constructor(private authService: AuthService, private http: HttpClient,private router:Router) {}
 
   ngOnInit(): void {
     this.loadUserDetails();
@@ -63,8 +64,15 @@ export class UserDashboardComponent implements OnInit {
         error => console.error("❌ Error fetching available cycles", error)
       );
   }
-  
-
+  navigateToBorrowCycle(){
+    this.router.navigate(["/cycles/borrow"]);
+  }
+  navigateToViewRequest(){
+    this.router.navigate(["/user/requests"]);
+  }
+  navigateToReturnCycle(){
+    this.router.navigate(['/cycles/return']);
+  }
   logout() {
     this.authService.logout();
   }

@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -16,18 +16,25 @@ export class AuthGuard implements CanActivate {
     }
 
     const token = localStorage.getItem('token');
-    if (!token) {
-      this.router.navigate(['/']);
+    const userRole = localStorage.getItem('role');
+
+    if (!token || !userRole) {
+      this.router.navigate(['/']); // Redirect to home if no token
       return false;
     }
 
     try {
       const decodedToken: any = jwtDecode(token);
-      const userRole = localStorage.getItem('role');
-
-      // ✅ Ensure the expected role is matched
       const expectedRole = route.data['role'];
-      if (expectedRole && userRole?.toLowerCase() !== expectedRole.toLowerCase()) {
+
+      // ✅ Restrict user from accessing admin routes
+      if (state.url.startsWith('/admin') && userRole.toLowerCase() !== 'admin') {
+        this.router.navigate(['/']); // Redirect non-admins from admin routes
+        return false;
+      }
+
+      // ✅ Ensure user role matches expected role (if specified in route)
+      if (expectedRole && userRole.toLowerCase() !== expectedRole.toLowerCase()) {
         this.router.navigate(['/']); // Redirect if role mismatch
         return false;
       }
