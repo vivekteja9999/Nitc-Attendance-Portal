@@ -1,0 +1,55 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="container mt-4">
+  <h2 class="text-center">Borrow a Key</h2>
+
+  <div class="alert alert-info" *ngIf="role !== 'cr' && role !== 'admin'">
+    <strong>Access Denied:</strong> Only Class Representatives (CRs) and Admins can borrow keys.
+  </div>
+
+  <div class="row justify-content-center" *ngIf="role === 'cr' || role === 'admin'">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4">
+        <form (ngSubmit)="requestBorrow()">
+          <!-- Location Selection -->
+          <div class="mb-3">
+            <label class="form-label">Select a Location</label>
+            <select class="form-select" [(ngModel)]="selectedLocation" name="selectedLocation" (change)="onLocationChange()" required>
+              <option value="" disabled>Select a Location</option>
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+          </div>
+
+          <!-- Key Selection (Filtered by Location) -->
+          <div class="mb-3">
+            <label class="form-label">Select a Key</label>
+            <select class="form-select" [(ngModel)]="selectedKeyId" name="selectedKeyId" required [disabled]="!selectedLocation || filteredKeys.length === 0">
+              <option value="" disabled>Select a Key</option>
+              <option *ngFor="let key of filteredKeys" [value]="key.keyId">
+                {{ key.keyId }} - {{ key.location }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Duration Input -->
+          <label>Start Time:</label>
+          <input type="time" class="form-control" [(ngModel)]="startTime" name="startTime" required />
+                <p>Start Time: {{ startTime }}</p>
+                <label>End Time:</label>
+                <input type="time" class="form-control" [(ngModel)]="endTime" name="endTime" required />
+                <p>End Time: {{ endTime }}</p>
+          <!-- Borrow From Selection -->
+          <div class="mb-3">
+            <label class="form-label">Borrow From</label>
+            <select class="form-select" [(ngModel)]="borrowFrom" name="borrowFrom" required>
+              <option value="cr">Another CR</option>
+              <option value="admin">Admin Approval</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100" [disabled]="!selectedLocation || !selectedKeyId">Request Borrow</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
