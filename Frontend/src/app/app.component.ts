@@ -5,7 +5,7 @@ import { UserDashboardComponent } from './dashboards/user-dashboard/user-dashboa
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginComponent,UserDashboardComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

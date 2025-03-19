@@ -68,7 +68,9 @@ export class NavbarLoggedComponent implements OnInit {
   toggleProfileDropdown() {
     this.isProfileOpen = !this.isProfileOpen;
   }
-
+  navigateToProfile(){
+    this.router.navigate(["/profile"]);
+  }
   toggleNotifications() {
     this.isNotificationsOpen = !this.isNotificationsOpen;
     

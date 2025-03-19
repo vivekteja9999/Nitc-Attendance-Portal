@@ -14,8 +14,10 @@
         <div class="dashboard-card">
           <h4 class="card-title text-primary">KEYS</h4>
           <ul>
-            <li>ELHC 403 ALLOCATED TO USER 2.</li>
-            <li>ELHC 402 IS BORROWED BY USER1 FROM USER 3.</li>
+            <li *ngFor="let key of keysList">
+              {{key.location}}:{{ key.keyId }} key is  {{ key.status }} by {{ key.borrowerEmail }}
+            </li>
+            <li *ngIf="keysList" class="text-center"> No Keys Borrowed Yet!!</li>
           </ul>
         </div>
       </div>
@@ -23,12 +25,15 @@
         <div class="dashboard-card">
           <h4 class="card-title text-success">CYCLES</h4>
           <ul>
-            <li>ELHC 403 ALLOCATED TO USER 2.</li>
-            <li>ELHC 402 IS BORROWED BY USER1 FROM USER 3.</li>
+            <li *ngFor="let cycle of cyclesList">
+              Cycle - {{ cycle.cycleId }} is {{ cycle.status }} by {{ cycle.borrowerEmail }}
+            </li>
+            <li *ngIf="cyclesList" class="text-center"> No Cycles Borrowed Yet!!</li>
           </ul>
         </div>
       </div>
     </div>
+    
   
     <!-- Cycle Data Form -->
     <div class="row mt-4">

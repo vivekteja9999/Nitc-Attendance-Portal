@@ -11,7 +11,7 @@
 
   <div class="row">
     <!-- Available Cycles (Only Visible if Filtered Items Exist) -->
-    <div class="col-md-6" *ngIf="filteredAvailableCycles.length > 0">
+    <div class="col-md-12" *ngIf="filteredAvailableCycles.length > 0">
       <div class="card border-success shadow-sm">
         <div class="card-header bg-success text-white text-center">
           <h5>Available Cycles</h5>
@@ -23,12 +23,22 @@
                 <tr>
                   <th>Cycle Number</th>
                   <th>Location</th>
+                  <th>Gear Type</th>
+                  <th>Borrowed By</th>
+                  <th>Borrowed Time</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let cycle of filteredAvailableCycles">
                   <td>{{ cycle.cycleId }}</td>
                   <td>{{ cycle.location }}</td>
+                  <td>{{cycle.gearType || 'Not Mentioned'}}</td>
+                  <td>{{cycle.borrowedBy || 'Not Borrowed'}}</td>
+                  <td>{{cycle.borrowedAt || 'Not Borrowed'}}</td>
+                  <td><button class="btn btn-danger" (click)="deleteCycle(cycle.cycleId)">
+                    Delete Cycle
+                  </button></td>
                 </tr>
               </tbody>
             </table>
@@ -51,13 +61,15 @@
                   <th>Cycle Number</th>
                   <th>Location</th>
                   <th>Borrower</th>
+                  <th>Borrowed Time</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let cycle of filteredBorrowedCycles">
                   <td>{{ cycle.cycleId }}</td>
                   <td>{{ cycle.location }}</td>
-                  <td>{{ cycle.borrower }}</td>
+                  <td>{{ cycle.borrowedBy || 'Not Borrowed'  }}</td>
+                  <td>{{cycle.borrowedAt || 'Not Borrowed'}}</td>
                 </tr>
               </tbody>
             </table>

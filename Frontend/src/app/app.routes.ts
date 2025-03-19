@@ -13,6 +13,11 @@ import { BorrowComponent } from './cycle/borrow/borrow.component';
 import { AdminComponent } from './cycle/admin/admin.component';
 import { UserComponent } from './cycle/user/user.component';
 import { ReturnComponent } from './cycle/return/return.component';
+import { CrComponent } from './cycle/cr/cr.component';
+import { borrowComponent } from './key/borrow/borrow.component';
+import { ProfileComponent } from './util/profile/profile.component';
+import { returnComponent } from './key/return/return.component';
+import { KeyListComponent } from './util/key-list/key-list.component';
 export const routes: Routes = [
   {path: '', component: LoginComponent},
   {path:'user/dashboard', component: UserDashboardComponent,canActivate: [AuthGuard]},
@@ -25,5 +30,10 @@ export const routes: Routes = [
   {path: 'cycles/borrow',component:BorrowComponent,canActivate:[AuthGuard]},
   {path:'admin/requests',component:AdminComponent,canActivate:[AuthGuard]},
   {path:'user/requests',component:UserComponent,canActivate:[AuthGuard]},
-  {path:'cycles/return',component:ReturnComponent,canActivate:[AuthGuard]}
+  {path:'cycles/return',component:ReturnComponent,canActivate:[AuthGuard]},
+  {path:'cr/requests',component:CrComponent,canActivate:[AuthGuard]},
+  {path:'key/borrow',component:borrowComponent,canActivate:[AuthGuard]},
+  {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]},
+  {path:'key/return',component:returnComponent,canActivate:[AuthGuard]},
+  {path:'admin/keys/list',component:KeyListComponent,canActivate:[AuthGuard]}
 ];

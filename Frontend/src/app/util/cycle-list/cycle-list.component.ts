@@ -30,12 +30,21 @@ export class CycleListComponent implements OnInit {
       })
     };
   }
-
+  deleteCycle(cycleId: string) {
+    this.http.post(`http://localhost:8082/cycles/delete/${cycleId}`, {} ,this.getHttpOptions()).subscribe({
+      next: () => { 
+        this.loadCycles();
+      },
+      error: (err) => { 
+        console.error('Failed to delete cycle:', err);
+      }
+    });
+  }
   loadCycles() {
     this.http.get<any[]>('http://localhost:8082/cycles/all',{...this.getHttpOptions()}).subscribe(
       (data) => {
         console.log("Cycles Data:", data);
-        this.availableCycles = data.filter(cycle => cycle.status === 'Available');
+        this.availableCycles = data
         this.borrowedCycles = data.filter(cycle => cycle.status === 'Borrowed');
       },
       (error) => {

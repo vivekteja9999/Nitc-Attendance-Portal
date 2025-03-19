@@ -13,7 +13,7 @@ import {provideToastr} from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()),importProvidersFrom(BrowserModule,FormsModule,HttpClientModule,RouterModule),AuthGuard,provideAnimations(),provideToastr(
     {
-      timeOut: 5000,
+      timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton:true,

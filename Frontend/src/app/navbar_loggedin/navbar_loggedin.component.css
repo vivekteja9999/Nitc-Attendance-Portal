@@ -198,6 +198,9 @@
   .title {
     font-size: 10px;
   }
+  .not-but{
+    margin-right: 1px;
+  }
 }
 
 
@@ -364,4 +367,25 @@ body {
   height: 5px;
   cursor: pointer;
   color:#000;
+}
+@media (max-width:768px){
+  .not-but{
+    margin: 0;
+    width: 30px;
+    height: 30px;
+  }
+  .notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: black;
+    font-size: 12px;
+    padding: 2px 2px;
+    border-radius: 50%;
+  }
+  .notification-dropdown {
+    position: relative;
+    margin-right: 5px;
+  }
 }

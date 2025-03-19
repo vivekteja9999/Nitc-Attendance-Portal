@@ -45,8 +45,7 @@
           <i class="fa-solid fa-user"></i>
         </button>
         <div class="dropdown-menu" [class.show]="isProfileOpen">
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Settings</a>
+          <button class="dropdown-item" (click)="navigateToProfile()">Profile</button>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item btn btn-danger" (click)="logout()">
             <i class="fa-solid fa-right-from-bracket"></i> Logout

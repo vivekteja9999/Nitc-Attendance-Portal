@@ -30,6 +30,7 @@ h2 {
 .scrollable-table {
   max-height: 300px; /* Adjust height as needed */
   overflow-y: auto;
+  width: 100%;
 }
 
 /* Customize scrollbar */
