@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +34,15 @@ public class CycleService {
                 .borrowedAt(null)
                 .build();
         return cycleRepository.save(cycle);
+    }
+    public List<Cycle> getAll(){
+        return cycleRepository.findAll();
+    }
+    public Optional<Cycle> getCycleByCycleId(String id){
+        return cycleRepository.findByCycleId(id);
+    }
+    @Transactional
+    public void deleteCycle(String cycleId) {
+        cycleRepository.deleteByCycleId(cycleId);
     }
 }

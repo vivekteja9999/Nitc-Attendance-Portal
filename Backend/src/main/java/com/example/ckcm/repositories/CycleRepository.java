@@ -13,4 +13,7 @@ public interface CycleRepository extends JpaRepository<Cycle,Long> {
     Optional<Cycle> findByBorrowedBy(String email);
     List<Cycle> findByStatus(String status);
     boolean existsByCycleId(String cycleId);
+    List<Cycle> findAll();
+
+    void deleteByCycleId(String cycleId);
 }
