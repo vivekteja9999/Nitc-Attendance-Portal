@@ -16,8 +16,14 @@ export class CycleRegistrationComponent {
   gearType:string = "";
   constructor(private cycleService:CycleService,private toast:ToastrService){}
   registerCycle(){
+    this.cycleId = this.cycleId.trim();
+    this.location = this.location.trim();
     if (!this.cycleId || !this.location || !this.gearType) {
-      alert('Please enter all details');
+      this.toast.error("Enter All Details!!")
+      return;
+    }
+    if (!/^\d+$/.test(this.cycleId)) {  // ✅ Ensure only digits are entered
+      this.toast.error('Cycle ID must be a valid integer.');
       return;
     }
     this.cycleService.registerCycle(this.cycleId,this.location,this.gearType).subscribe(

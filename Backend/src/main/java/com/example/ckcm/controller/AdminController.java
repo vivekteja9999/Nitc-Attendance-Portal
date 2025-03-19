@@ -12,14 +12,12 @@ import com.example.ckcm.repositories.KeyBorrowRepository;
 import com.example.ckcm.repositories.KeyRepository;
 import com.example.ckcm.services.AuthenticationService;
 import com.example.ckcm.services.KeyBorrowService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,5 @@
 package com.example.ckcm.entities;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Key {
     private String location;
     private String status="Available";
     private String borrowedBy;
+    private String Owner = "Admin";
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date borrowedAt;
 }

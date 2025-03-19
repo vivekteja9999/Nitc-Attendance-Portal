@@ -43,7 +43,7 @@ public class KeyBorrowService {
                 keyBorrow.setKeyId(keyId);
                 keyBorrow.setBorrowerEmail(emailId);
                 keyBorrow.setDuration(duration);
-                keyBorrow.setRequestTime(new java.util.Date());
+                keyBorrow.setRequestTime(new Date());
                 keyBorrow.setStatus("Pending");
                 keyRepository.save(key);
                 return "Key Borrow Requested Submitted Successfully!! Waiting For Admin`s Approval";
@@ -62,7 +62,7 @@ public class KeyBorrowService {
                 key.setStatus("Borrowed");
                 keyRepository.save(key);
                 keyBorrow.setStatus("Approved");
-                keyBorrow.setApprovalTime(new java.util.Date());
+                keyBorrow.setApprovalTime(new Date());
                 keyBorrowRepository.save(keyBorrow);
                 return "Key Borrow Request Approved Successfully!!";
             }
@@ -74,7 +74,7 @@ public class KeyBorrowService {
         if(requestOpt.isPresent()){
             KeyBorrow keyBorrow = requestOpt.get();
             keyBorrow.setStatus("Rejected");
-            keyBorrow.setApprovalTime(new java.util.Date());
+            keyBorrow.setApprovalTime(new Date());
             keyBorrowRepository.save(keyBorrow);
             return "Key Borrow Request Rejected Successfully!!";
         }

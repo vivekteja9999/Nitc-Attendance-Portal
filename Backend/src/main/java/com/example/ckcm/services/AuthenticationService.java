@@ -45,8 +45,19 @@ public class AuthenticationService {
         var token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(token)
-                .role(user.getRole())
                 .email(user.getEmail())
+                .role(user.getRole())
+                .build();
+    }
+    public void changePassword(String email, String password){
+        var user = userRepository.findByEmail(email).orElseThrow();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+        var token = jwtService.generateToken(user);
+        AuthenticationResponse.builder()
+                .token(token)
+                .email(user.getEmail())
+                .role(user.getRole())
                 .build();
     }
 }

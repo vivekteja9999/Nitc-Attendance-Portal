@@ -18,7 +18,7 @@ import java.util.Date;
 @Table(name = "borrow_keys")
 public class KeyBorrow {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String keyId;
     private String borrowerEmail;

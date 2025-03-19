@@ -20,8 +20,13 @@ export class KeyRegistrationComponent {
   keyId : string = "";
   constructor(private keyService:KeyService,private toast:ToastrService){}
   registerKey(){
+    this.keyId = this.keyId.trim();
     if (!this.keyId || !this.location) {
       alert('Please enter all details');
+      return;
+    }
+    if (!/^\d+$/.test(this.keyId)) {  // ✅ Ensure only digits are entered
+      this.toast.error('Key ID must be a valid integer.');
       return;
     }
     this.keyService.registerKey(this.location,this.keyId).subscribe(

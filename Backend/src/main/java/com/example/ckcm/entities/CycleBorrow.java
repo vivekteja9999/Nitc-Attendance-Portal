@@ -18,7 +18,6 @@ public class CycleBorrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Date requestTime;
     private int duration;
     private String status = "Pending";

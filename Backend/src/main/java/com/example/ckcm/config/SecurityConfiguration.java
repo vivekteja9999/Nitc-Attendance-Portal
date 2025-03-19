@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -24,8 +25,10 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -58,7 +61,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/login", "/auth/authenticate").permitAll()  // Allow authentication APIs
+                .requestMatchers("/auth/login", "/auth/authenticate","/ws/**").permitAll()  // Allow authentication APIs
                 .requestMatchers("/user/**").authenticated()  // Protect user details API
                 .anyRequest().authenticated()
         );
@@ -74,11 +77,12 @@ public class SecurityConfiguration {
 
         // OAuth2 Login configuration
         http.oauth2Login(oauth2 -> oauth2
-                .loginPage("/auth/login")
-                .userInfoEndpoint(userInfo -> userInfo
-                        .oidcUserService(new OidcUserService())
-                        .userService(new DefaultOAuth2UserService()))
-                .successHandler(oAuth2LoginSuccessHandler())
+                        .loginPage("/auth/login")
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .oidcUserService(new OidcUserService())
+                                .userService(new DefaultOAuth2UserService()))
+                        .successHandler(oAuth2LoginSuccessHandler())
+                        .failureHandler(new CustomOAuth2FailureHandler())
                 // Custom success handler
         );
 
@@ -119,6 +123,12 @@ public class SecurityConfiguration {
                 String email = oAuth2User.getAttribute("email");
                 String firstName = oAuth2User.getAttribute("given_name");
                 String lastName = oAuth2User.getAttribute("family_name");
+                if (!email.endsWith("@nitc.ac.in")) {
+                    if (email == null || !email.endsWith("@nitc.ac.in")) {
+                        response.sendRedirect("http://localhost:4200?error=Only+NITC+emails+are+allowed");
+                        return;
+                    }
+                }
 
                 Optional<User> existingUser = userRepository.findByEmail(email);
                 User user;
@@ -135,19 +145,12 @@ public class SecurityConfiguration {
                     user = existingUser.get();
                 }
 
-                // ✅ Generate JWT Token
                 String token = jwtService.generateToken(user);
-
-                // ✅ Manually authenticate the user
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(user, null, List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-
-                // ✅ Store authentication in session for API access
                 request.getSession().setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-
-                // ✅ Forward request to Controller for redirection
-                response.sendRedirect("/auth/oauth2/success?token=" + token + "&role=" + user.getRole().name());
+                response.sendRedirect("/auth/oauth2/success?token=" + token + "&role=" + user.getRole().name()+"&email="+user.getEmail());
             }
         };
     }
@@ -177,5 +180,14 @@ public class SecurityConfiguration {
     @Bean
     public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withSecretKey(jwtService.getSignInKey()).build();
+    }
+    @Component
+    public class CustomOAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler {
+
+        @Override
+        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+            // ✅ Redirect error to frontend with error message
+            response.sendRedirect("http://localhost:4200?error=Invalid+credentials");
+        }
     }
 }

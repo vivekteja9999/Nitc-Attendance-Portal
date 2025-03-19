@@ -1,4 +1,5 @@
 package com.example.ckcm.repositories;
+
 import com.example.ckcm.entities.Key;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface KeyRepository extends JpaRepository<Key,Long> {
     Optional<Key> findByBorrowedBy(String email);
     List<Key> findByStatus(String status);
     Optional<Key> findByKeyIdAndLocation(String keyId, String location);
+
+    void deleteByKeyId(String keyId);
 }

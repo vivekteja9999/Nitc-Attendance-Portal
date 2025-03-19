@@ -54,8 +54,8 @@ public class AuthenticationController {
     @GetMapping("/oauth2/success")
     public void oauth2LoginSuccess(@RequestParam("token") String token,
                                    @RequestParam("role") String role,
-                                   HttpServletResponse response) throws IOException {
+                                   HttpServletResponse response,@RequestParam("email") String email) throws IOException {
         // ✅ Redirect to Angular frontend with token and role
-        response.sendRedirect("http://localhost:4200?token=" + token + "&role=" + role);
+        response.sendRedirect("http://localhost:4200?token=" + token + "&role=" + role+"&email="+email);
     }
 }
