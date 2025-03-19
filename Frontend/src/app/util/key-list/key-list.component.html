@@ -1,0 +1,41 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+<div class="container mt-4">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center text-primary mb-4">🔑 Available Keys</h2>
+
+    <div *ngIf="keys.length > 0; else noKeys">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Key ID</th>
+              <th>Location</th>
+              <th>Borrowed By</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let key of keys; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ key.keyId }}</td>
+              <td>{{ key.location }}</td>
+              <td>{{ key.borrowedBy || 'Not borrowed' }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteKey(key.keyId)">
+                  Delete Key
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noKeys>
+      <div class="text-center mt-3">
+        <p class="text-muted">🙅‍♂️ No keys available at the moment.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
