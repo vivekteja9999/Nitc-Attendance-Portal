@@ -1,0 +1,74 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+<div class="tables-container">
+  <!-- Left Table - Manage Subjects -->
+  <div class="table-container">
+    <h2>Manage Subjects</h2>
+    
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <div class="input-group mt-3">
+        <input type="text" class="form-control" placeholder="Search by SubjectCode" [(ngModel)]="searchsubjectCode">
+        <button class="btn btn-primary mt-2" (click)="searchSubject()">Search</button>
+      </div>
+    </div>
+
+    <!-- Subject List -->
+    <table *ngIf="filteredSubjects.length > 0" class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject Code</th>
+          <th>Subject Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of filteredSubjects">
+          <td>{{ filteredSubjects.indexOf(subject) + 1 }}</td>
+          <td>{{ subject.subjectCode }}</td>
+          <td>{{ subject.subjectName }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteSubject(subject.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="filteredSubjects.length === 0" class="text-danger">No Subjects found.</p>
+  </div>
+
+  <!-- Right Table - Manage Classes -->
+  <div class="table-container">
+    <h2>Manage Classes</h2>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <div class="input-group mt-3">
+        <input type="text" class="form-control" placeholder="Search by Section Name" [(ngModel)]="searchclassCode">
+        <button class="btn btn-primary mt-2" (click)="searchClass()">Search</button>
+      </div>
+    </div>
+
+    <!-- Class List -->
+    <table *ngIf="filteredClasses.length > 0" class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Section Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let class of filteredClasses">
+          <td>{{ filteredClasses.indexOf(class) + 1 }}</td>
+          <td>{{ class.classId }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteClass(class.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="filteredClasses.length === 0" class="text-danger">No Classes found.</p>
+  </div>
+</div>

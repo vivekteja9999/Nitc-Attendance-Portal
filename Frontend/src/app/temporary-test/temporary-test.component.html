@@ -1,0 +1,54 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+<div class="qr-container">
+    <h2>Generate Attendance QR Code</h2>
+    <form>
+        <!-- ✅ Multi-Select Sections (Checkboxes) -->
+        <div class="form-group">
+            <label>Select Sections:</label>
+            <div class="checkbox-group">
+                <div *ngFor="let section of filteredClasses" class="checkbox-item">
+                    <span>{{ section.classId }}</span>
+                    <input type="checkbox" [value]="section.classId" (change)="toggleSectionSelection(section.classId)" />
+                </div>
+            </div>
+            <p *ngIf="selectedSections.length">Selected Sections: {{ selectedSections.join(', ') }}</p>
+        </div>
+
+        <!-- ✅ Select Subject -->
+        <div class="form-group">
+            <label for="subject">Select Subject:</label>
+            <select id="subject" [(ngModel)]="selectedSubject" (change)="updateCourseCode()" name="selectedSubject" required>
+                <option *ngFor="let subject of filteredSubjects" [value]="subject.subjectName">
+                    {{ subject.subjectName }}
+                </option>
+            </select>
+            <p *ngIf="selectedSubject">Selected Subject: {{ selectedSubject }}</p>
+        </div>
+
+        <!-- ✅ Display Course Code -->
+        <div class="form-group">
+            <label>Course Code:</label>
+            <p *ngIf="subjectCode">Course Code: {{ subjectCode }}</p>
+        </div>
+
+        <!-- ✅ Generate QR Code Button -->
+        <button type="submit" class="btn" (click)="generateQRCode()">Generate QR Code</button>
+    </form>
+</div>
+
+<style>
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .checkbox-item span {
+        min-width: 50px;
+        text-align: left;
+    }
+</style>

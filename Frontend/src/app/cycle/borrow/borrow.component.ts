@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WebSocketService } from '../../util/websocket.service';
+import { WebSocketService } from '../../../util/websocket.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NavbarLoggedComponent } from '../../navbar_loggedin/navbar_loggedin.component';
+import { NavbarLoggedComponent } from '../../../navbar_loggedin/navbar_loggedin.component';
 import {ZXingScannerModule} from '@zxing/ngx-scanner';
-import { CycleListComponent } from '../../util/cycle-list/cycle-list.component';
+import { CycleListComponent } from '../../../util/cycle-list/cycle-list.component';
 import {Router} from '@angular/router'
 @Component({
   selector: 'app-borrow',

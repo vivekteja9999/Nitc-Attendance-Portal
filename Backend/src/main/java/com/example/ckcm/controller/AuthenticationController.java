@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import com.example.ckcm.auth.RegisterRequest;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,6 +31,15 @@ public class AuthenticationController {
 
     @Autowired
     private JwtService jwtService;
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user) {
+        RegisterRequest request = new RegisterRequest(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        authenticationService.register(request);
+        return "redirect:/auth/login";
+
+    }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
@@ -48,7 +59,11 @@ public class AuthenticationController {
         }
     }
 
-
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
 
     // OAuth2 Login Success Handler
     @GetMapping("/oauth2/success")

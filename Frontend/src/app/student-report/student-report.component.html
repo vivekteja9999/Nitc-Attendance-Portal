@@ -1,0 +1,52 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="container">
+    <!-- Page Heading -->
+    <h2 class="text-center">Student Attendance Report</h2>
+
+    <!-- Search Bar -->
+    <div class="search-container">  
+        <input 
+            type="text" 
+            [(ngModel)]="studentEmail" 
+            class="form-control search-input" 
+            placeholder="Enter Student Email">
+        <button class="btn btn-primary search-btn" (click)="fetchStudentAttendance()">Search</button>
+    </div>
+
+    <!-- Fake Attendance Warning -->
+    <div *ngIf="fakeAttendance" class="alert alert-danger text-center mt-3">
+         Fake Attendance Detected: The student has marked attendance in multiple sections!
+    </div>
+
+    <!-- Attendance Table -->
+    <div *ngIf="attendanceReport.length > 0" class="mt-4">
+        <h4 class="text-center">Attendance Report</h4>
+        <table class="table table-striped table-bordered mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Classes Attended</th>
+                    <th>Classes Taken</th>
+                    <th>Attendance (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let record of attendanceReport" 
+                    [ngClass]="{'low-attendance': record.percentage < 80}">
+                    <td>{{ record.subjectCode }}</td>
+                    <td>{{ record.subjectName }}</td>
+                    <td>{{ record.classesAttended }}</td>
+                    <td>{{ record.classesTaken }}</td>
+                    <td>{{ record.percentage }}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- No Data Message -->
+    <div *ngIf="attendanceReport.length === 0 && !fakeAttendance" class="alert alert-info text-center mt-3">
+        No attendance data available.
+    </div>
+</div>

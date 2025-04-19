@@ -1,14 +1,15 @@
-<body class="bg-light">
+<!-- <body class="bg-light">
   <app-navbar-loggedin></app-navbar-loggedin>
   <div class="container-fluid dashboard-container">
-    <!-- Dashboard Title -->
+
+
     <div class="row">
       <div class="col-12 text-center">
         <h2 class="dashboard-title">DASHBOARD</h2>
       </div>
     </div>
   
-    <!-- Dashboard Cards -->
+
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="dashboard-card">
@@ -35,7 +36,7 @@
     </div>
     
   
-    <!-- Cycle Data Form -->
+  
     <div class="row mt-4">
       <div class="col-md-6">
         <div class="cycle-data-card">
@@ -50,7 +51,7 @@
         </div>
       </div>
   
-      <!-- Action Buttons -->
+  
       <div class="col-md-6">
         <div class="action-buttons">
           <button class="btn btn-danger w-100  edit" (click)="navigateToEditUserDetails()">
@@ -66,4 +67,15 @@
       </div>
     </div>
   </div>  
-</body>
+</body> -->
+
+
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="container">
+  <h2 class="welcome-text">WELCOME ADMIN!</h2> <!-- Added text here -->
+
+  <button class="button" (click)="navigateToEditUserDetails()">ASSIGN / REMOVE ROLES</button>
+  <button class="button" (click)="navigateTostudentdetails()">GET STUDENT ATTENDANCE REPORT</button>
+  <button class="button" (click)="navigatetobranch()">GET BRANCH WISE SHORTAGES</button>
+</div>

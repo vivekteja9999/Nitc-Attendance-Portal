@@ -1,0 +1,78 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+
+
+<div class="tables-container">
+  <!-- Left Table - Manage Subjects -->
+  <div class="table-container">
+    <h2>List of Available Subjects</h2>
+    
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <div class="input-group mt-3">
+        <input type="text" class="form-control" placeholder="Search by SubjectCode" [(ngModel)]="searchsubjectCode">
+        <button class="btn btn-primary mt-2" (click)="searchSubject()">Search</button>
+      </div>
+    </div>
+
+    <!-- Subject List -->
+    <table *ngIf="filteredSubjects.length > 0" class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject Code</th>
+          <th>Subject Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of filteredSubjects">
+          <td>{{ filteredSubjects.indexOf(subject) + 1 }}</td>
+          <td>{{ subject.subjectCode }}</td>
+          <td>{{ subject.subjectName }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="AddSubject(subject.id , subject.subjectCode , subject.subjectName , subject.teacherName)">Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="filteredSubjects.length === 0" class="text-danger">No Subjects found.</p>
+  </div>
+  
+
+  <!-- Right Table - Manage added subjects -->
+  <div class="table-container">
+    <h2 style="display: flex; justify-content: space-between; align-items: center;">
+      Added Subjects
+      <button class="save-subjects-btn btn btn-success" (click)="savesubjects()">Save Subjects</button>
+    </h2>
+
+    <!-- Search Bar -->
+
+  
+
+    <!-- Class List -->
+    <table *ngIf="addedSubjects.length > 0" class="table table-striped mt-3">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Subject Code</th>
+              <th>Subject Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subject of addedSubjects">
+              <td>{{ addedSubjects.indexOf(subject) + 1 }}</td>
+              <td>{{ subject.subjectCode }}</td>
+              <td>{{ subject.subjectName }}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" (click)="deletefromadded(subject.id , subject.subjectCode , subject.subjectName , subject.teacherName)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+
+    <p *ngIf="addedSubjects.length === 0" class="text-danger">No added subjects found.</p>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  // ✅ Import HttpClient
-import { CycleService } from '../../registrations/cycle.service';
+import { CycleService } from '../../registrations/cycle-registration/cycle.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -41,58 +41,35 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   fetchCycles() {
-    this.http.get<any[]>("http://localhost:8082/cycles/all", this.getHttpOptions()).subscribe(
+    this.http.get<any[]>("http://localhost:8082/subjects/all", this.getHttpOptions()).subscribe(
       (data) => {
         this.cyclesList = data.filter(cycle => cycle.status === "Borrowed");
       },
       (error) => {
-        this.toast.error("Error fetching cycles!");
+        
       }
     );
   }
 
   fetchKeys() {
-    this.http.get<any[]>("http://localhost:8082/keys/all", this.getHttpOptions()).subscribe(
+    this.http.get<any[]>("http://localhost:8082/classes/all", this.getHttpOptions()).subscribe(
       (data) => {
         this.keysList = data.filter(key => key.status === "Borrowed");
       },
       (error) => {
-        this.toast.error("Error fetching keys!");
+       
       }
     );
   }
 
-  downloadQr() {
-    if (!this.cycleId) {
-      this.toast.error("Please enter a Cycle Number/Name");
-      return;
-    }
-    const filename = `QR_${this.cycleId}.png`;
-    this.cycleService.downloadQrCode(filename).subscribe(
-      (response) => {
-        const blob = new Blob([response], { type: 'image/png' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${this.cycleId}_QRCode.png`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-      },
-      (error) => {
-        this.toast.error("Resource Not Found!!");
-      }
-    );
-  }
-
-  navigateToCycleRegistrationForm() {
-    this.router.navigate(["/admin/cycles/register"]);
-  }
-
-  navigateToKeyRegistrationForm() {
-    this.router.navigate(["/admin/keys/register"]);
-  }
+navigateTostudentdetails()
+{
+  this.router.navigate(["/admin/studentreport"]);
+}
+navigatetobranch()
+{
+  this.router.navigate(["/admin/branch"]);
+}
 
   navigateToEditUserDetails() {
     this.router.navigate(["/admin/users/edit"]);

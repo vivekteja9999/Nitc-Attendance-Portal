@@ -1,0 +1,50 @@
+/* Move heading further below the navbar */
+.text-center {
+    text-align: center;
+    margin-top: 100px; /* Increased spacing */
+    margin-bottom: 20px;
+}
+
+/* Adjusted search bar position */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px; /* Keeps search bar slightly below heading */
+}
+
+/* Style for search input */
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+/* Style for search button */
+.search-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+/* Make table more readable */
+.table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+/* Highlight low attendance */
+.low-attendance {
+    background-color: #ffcccc !important; /* Light red background */
+    color: #ff0000; /* Red text */
+    font-weight: bold;
+}
+
+/* Center alert messages */
+.alert {
+    width: 60%;
+    margin: auto;
+}

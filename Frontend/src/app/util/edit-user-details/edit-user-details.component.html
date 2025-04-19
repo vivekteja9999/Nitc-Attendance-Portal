@@ -28,7 +28,7 @@
           <td>{{ user.id }}</td>
           <td>{{ user.firstName }} {{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
+            <td>{{ user.role === 'CR' ? 'TEACHER' : (user.role === 'USER' ? 'STUDENT' : user.role) }}</td>
         </tr>
       </tbody>
     </table>
@@ -39,9 +39,9 @@
     <div *ngIf="selectedUser" class="mt-4 p-3 rounded shadow">
       <h4>Edit Role for {{ selectedUser.firstName }} {{ selectedUser.lastName }}</h4>
       <select class="form-control mt-2" [(ngModel)]="newRole">
-        <option value="USER">USER</option>
+        <option value="USER">STUDENT</option>
         <option value="ADMIN">ADMIN</option>
-        <option value="CR">CR</option>
+        <option value="CR">TEACHER</option>
       </select>
       <button class="btn btn-success mt-2" (click)="updateRole()">Update Role</button>
       <button class="btn btn-secondary mt-2" (click)="cancelEdit()">Cancel</button>

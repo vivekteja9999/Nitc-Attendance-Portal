@@ -2,25 +2,22 @@ export const MENU_ITEMS = {
   ADMIN: [
     { title: 'Dashboard', icon: 'fa-solid fa-house', route: '/admin/dashboard' },
     { title: 'Users', icon: 'fa-solid fa-users', route: '/admin/users/edit' },
-    { title: 'Keys', icon: 'fa-solid fa-key', route: '/admin/keys/list' },
-    { title: 'Cycles', icon: 'fa-solid fa-bicycle', route: '/admin/cycles' },
-    {title:'View Requests',icon:"fa-solid fa-paper-plane",route:"/admin/requests"},
-    {title:'Logout',icon:'fa-solid fa-right-from-bracket',action:'logout'}
+    { title: 'Subject Registration', icon: 'fa-solid fa-book-open', route: '/admin/subjects' }, // 📚 Book icon for subjects
+    { title: 'Class Registration', icon: 'fa-solid fa-school', route: '/admin/class' }, // 🏫 School icon for classrooms
+    { title: 'Subj/Class Modify', icon: 'fa-solid fa-rotate-right', route: '/admin/sc_modify' },
+    { title: 'Logout', icon: 'fa-solid fa-right-from-bracket', action: 'logout' } ,
+   
   ],
   CR: [
     { title: 'Dashboard', icon: 'fa-solid fa-house', route: '/cr/dashboard' },
-    { title: 'Borrow Key', icon: 'fa-solid fa-key', route: '/key/borrow' },
-    { title: 'Return Key', icon: 'fa-solid fa-key', route: '/key/return' },
-    { title: 'Borrow Cycle', icon: 'fa-solid fa-bicycle', route: '/cycles/borrow' },
-    { title: 'Return Cycle', icon: 'fa-solid fa-bicycle', route: '/cycles/return' },
-    {title:'View Requests',icon:"fa-solid fa-paper-plane",route:"/cr/requests"},
+    { title: 'Take Semester Subjects', icon: 'fa-solid fa-book-open', route: '/cr/update_subjects' },
+    { title: 'Modify Teaching Subjects', icon: 'fa-solid fa-school', route: '/cr/modify_teaching_subjects' },
     {title:'Logout',icon:'fa-solid fa-right-from-bracket',action:'logout'}
-  ],
+  ] ,
   USER: [
     { title: 'Dashboard', icon: 'fa-solid fa-house', route: '/user/dashboard' },
-    { title: 'Borrow Cycle', icon: 'fa-solid fa-bicycle', route: '/cycles/borrow' },
-    { title: 'Return Cycle', icon: 'fa-solid fa-bicycle', route: '/cycles/return' },
-    {title:'View Requests',icon:"fa-solid fa-paper-plane",route:"/user/requests"},
+    { title: 'Take Semester Subjects', icon: 'fa-solid fa-book-open', route: '/cr/update_subjects' },
+    { title: 'Modify Studying Subjects', icon: 'fa-solid fa-school', route: '/cr/modify_teaching_subjects' },
     {title:'Logout',icon:'fa-solid fa-right-from-bracket',action:'logout'}
   ]
 };

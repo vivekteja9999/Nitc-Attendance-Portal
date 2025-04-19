@@ -1,0 +1,30 @@
+<div class="header">
+    <app-navbar></app-navbar>
+  </div>
+  
+  <div class="login-container">
+    <div class="login-box">
+        <h2>ADMIN LOGIN</h2>
+  
+        <form class="login-form" (ngSubmit)="login()">
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" [(ngModel)]="username" required  placeholder="Enter your username">
+        </div>
+  
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" [(ngModel)]="password" required  placeholder="Enter your password">
+        </div>
+  
+        <div class="login_button">
+          <button type="submit" class="btn btn-primary">LOGIN</button>
+        </div>
+  
+        </form>
+  
+  
+  
+    </div>
+  </div>
+  

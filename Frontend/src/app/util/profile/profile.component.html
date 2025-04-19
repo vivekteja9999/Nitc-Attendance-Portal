@@ -22,40 +22,13 @@
   
         <div class="info-box" *ngIf="isAdmin === true || isCR === true">
           <label>Role</label>
-          <p>{{ role }}</p>
+          <p>{{ role === 'CR' ? 'TEACHER' : role === 'USER' ? 'STUDENT' : role }}</p>
         </div>
   
-        <div class="info-box" *ngIf="isAdmin === false">
+        <div class="info-box" *ngIf="isAdmin === false && role !== 'CR'">
           <label>Roll Number</label>
-          <p>{{ rollNo}}</p>
+          <p>{{ rollNo }}</p>
         </div>
-        <!-- Password Change Section -->
-<div class="password-section" *ngIf="isAdmin">
-  <button class="change-password-btn btn btn-dark" (click)="togglePasswordForm()">
-    {{ showPasswordForm ? 'Cancel' : 'Change Password' }}
-  </button>
-
-  <!-- Password Input Fields (Shown when button is clicked) -->
-  <div class="password-form" *ngIf="showPasswordForm">
-    <div class="input-group">
-      <label>Current Password</label>
-      <input type="password" [(ngModel)]="currentPassword" placeholder="Enter current password" class="form-control">
-    </div>
-
-    <div class="input-group">
-      <label>New Password</label>
-      <input type="password" [(ngModel)]="newPassword" placeholder="Enter new password" class="form-control">
-    </div>
-
-    <div class="input-group">
-      <label>Confirm New Password</label>
-      <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirm new password" class="form-control">
-    </div>
-
-    <button class="submit-btn btn btn-success" (click)="changePassword()">Submit</button>
-  </div>
-</div>
-
   
         <!-- Logout Button -->
         <button class="logout-btn" (click)="logout()">LOGOUT</button>

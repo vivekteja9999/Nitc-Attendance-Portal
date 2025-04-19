@@ -1,0 +1,31 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="qr-container">
+    <h2>Generate Attendance QR Code</h2>
+
+    <form >
+        <div class="form-group">
+            <label for="section">Select Section:</label>
+            <select id="section" [(ngModel)]="selectedSection" name="selectedSection" required>
+            <option *ngFor="let section of filteredClasses" [value]="section.classId"> {{ section.classId }}</option>
+            </select>
+            <p *ngIf="selectedSection">Selected Section: {{ selectedSection }}</p>
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Select Subject:</label>
+            <select id="subject" [(ngModel)]="selectedSubject" (change)="updateCourseCode()" name="selectedSubject" required>
+            <option *ngFor="let subject of filteredSubjects" [value]="subject.subjectCode">{{ subject.subjectName }}</option>
+            </select>
+            <p *ngIf="selectedSubject">Selected Subject: {{ selectedSubject }}</p>
+        </div>
+
+        <div class="form-group">
+            <label for="courseCode">Course Code:</label>
+            <input type="text" id="courseCode" [(ngModel)]="subjectCode" name="subjectCode" readonly required />
+            <p *ngIf="subjectCode">Course Code: {{ subjectCode }}</p>
+        </div>
+
+        <button type="submit" class="btn">Generate QR Code</button>
+    </form>
+</div>

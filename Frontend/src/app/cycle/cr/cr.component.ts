@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from '../../util/websocket.service';
+import { WebSocketService } from '../../../util/websocket.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NavbarLoggedComponent } from '../../navbar_loggedin/navbar_loggedin.component';
+import { NavbarLoggedComponent } from '../../../navbar_loggedin/navbar_loggedin.component';
 
 @Component({
   selector: 'app-cr',

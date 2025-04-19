@@ -1,0 +1,15 @@
+<body>
+    <app-navbar-loggedin></app-navbar-loggedin>
+        <div class="container-fluid">
+          <div class="registration-card">
+            <h2>CLASS REGISTRATION</h2>
+            <form (ngSubmit)="registerClass()">
+              <label for="classId">Section Name</label>
+              <input type="text" id="classId" [(ngModel)]="classId" name="classId" required placeholder="Enter Class Name"/>
+              <button type="submit" class="generate-btn">
+                Register
+              </button>
+            </form>
+          </div>
+        </div>  
+      </body>

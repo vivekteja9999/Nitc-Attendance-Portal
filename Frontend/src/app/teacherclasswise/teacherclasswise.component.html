@@ -1,0 +1,81 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+<div class="container mt-5 pt-5 content-below-navbar">
+    <h3>Class-wise Attendance Report</h3>
+  
+    <div class="row mb-3">
+      <!-- Subject Selection -->
+      <div class="col-md-6">
+        <label for="subjectSelect" class="form-label">Select Subject</label>
+        <select class="form-select" [(ngModel)]="selectedSubjectCode" (change)="onSubjectSelect()">
+          <option value="" disabled>Select Subject</option>
+          <option *ngFor="let subject of subjects" [value]="subject.subjectCode">
+            {{ subject.subjectName }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Section Selection -->
+      <div class="col-md-6">
+        <label for="sectionSelect" class="form-label">Select Section</label>
+        <select class="form-select" [(ngModel)]="selectedSection">
+          <option [ngValue]="null" disabled selected>Select Section</option>
+          <option *ngFor="let section of sections" [ngValue]="section">
+            {{ section.classId }}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Get Attendance Button -->
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="getAttendanceData()">Get Attendance Data</button>
+    </div>
+
+
+    <div class="mb-3" *ngIf="students.length > 0">
+        <button class="btn btn-success" (click)="downloadPDF()">Download PDF</button>
+      </div>
+  
+  
+    <!-- Search Bar -->
+    <div class="mb-3" *ngIf="students.length > 0">
+      <label for="search" class="form-label">Search Student by Name or Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="search"
+        placeholder="Type to search..."
+        [(ngModel)]="searchQuery"
+      />
+    </div>
+  
+    <!-- Results -->
+    <div *ngIf="showResults">
+      <div *ngIf="noDataFound" class="alert alert-warning">
+        No attendance data found for selected subject and section.
+      </div>
+  
+      <table *ngIf="!noDataFound" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Sl.No</th>
+            <th>Student Email</th>
+            <th>Classes Attended</th>
+            <th>Total Classes</th>
+            <th>Attendance %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of filteredStudents(); let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ student.studentEmail }}</td>
+            <td>{{ student.attended }}</td>
+            <td>{{ student.totalClasses }}</td>
+            <td [ngClass]="{ 'text-danger': student.percentage < 80 }">
+              {{ student.percentage }}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

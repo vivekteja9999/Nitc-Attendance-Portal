@@ -1,0 +1,65 @@
+/* General Styling for Tables */
+/* Center the table container */
+.tables-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+  }
+  
+  /* Style the table container */
+  .table-container {
+    width: 50%; /* Adjust width as needed */
+    padding: 20px;
+    background: #fff; /* White background */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-radius: 10px;
+    text-align: center;
+  }
+   
+  
+  .table-container:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Adjust table styling */
+  .table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+  
+  .table thead {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .table th, .table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  .table-striped tbody tr:hover {
+    background-color: #e3eaf3;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-weight: bold;
+  }
+  
+  /* No Subjects/Classes Found Message */
+  .text-danger {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #dc3545;
+  }
+  

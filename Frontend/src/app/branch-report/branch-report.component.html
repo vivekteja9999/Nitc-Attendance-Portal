@@ -1,0 +1,43 @@
+<app-navbar-loggedin></app-navbar-loggedin>
+
+<div class="container">
+    <h2>Branch Wise Attendance Shortages</h2>
+
+    <div class="branch-container" [ngClass]="{'selected': selectedBranch}">
+        <!-- Branch Selection -->
+        <div class="branch-list">
+            <button *ngFor="let branch of branches" (click)="selectBranch(branch)" class="branch-button">
+                {{ branch }}
+            </button>
+        </div>
+
+        <!-- Student List Appears on the Right Side -->
+        <div class="student-list" *ngIf="selectedBranch">
+            <h5 style="color: red; margin-left: 50px; margin-top: 20px;" >                   Students with Attendance < 80% in {{ selectedBranch }}</h5>
+
+            <!-- Search Box -->
+            <input type="text" [(ngModel)]="studentSearch" (input)="filterStudents()" placeholder="Search student..." class="search-box">
+
+            <!-- Table -->
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Marked in Multiple Sections</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="filteredStudents.length === 0">
+                        <td colspan="2">No students found</td>
+                    </tr>
+                    <tr *ngFor="let student of filteredStudents">
+                        <td>{{ student.email }}</td>
+                        <td [ngClass]="{'marked-fake': student.hasFakeAttendance}">
+                            {{ student.hasFakeAttendance ? 'Yes' : 'No' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

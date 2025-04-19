@@ -1,0 +1,19 @@
+<body>
+<app-navbar-loggedin></app-navbar-loggedin>
+    <div class="container-fluid">
+      <div class="registration-card">
+        <h2>SUBJECT REGISTRATION</h2>
+        <form (ngSubmit)="registersubject()">
+          <label for="subjectcode">Subject Code</label>
+          <input type="text" id="subjectcode" [(ngModel)]="subjectcode" name="subjectcode" required placeholder="Enter Subject Code"/>
+          <label for="subjectname">Subject Name</label>
+          <input type="text" id="subjectname" [(ngModel)]="subjectname" name="subjectname" required placeholder="Enter Subject Name"/>
+          <!-- <label for="teachername">Teacher name</label>
+          <input type="text" id="teachername" [(ngModel)]="teachername" name="teachername" required placeholder="Enter Teacher Name"/>   -->
+          <button type="submit" class="generate-btn">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>  
+  </body>

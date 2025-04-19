@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from '../../util/websocket.service';
+import { WebSocketService } from '../../../util/websocket.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { NavbarLoggedComponent } from "../../navbar_loggedin/navbar_loggedin.component";
+import { NavbarLoggedComponent } from "../../../navbar_loggedin/navbar_loggedin.component";
 import { request } from 'http';
 @Component({
   selector: 'app-user',

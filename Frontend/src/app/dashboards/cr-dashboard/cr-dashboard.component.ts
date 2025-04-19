@@ -11,23 +11,19 @@ import { Router } from '@angular/router';
 })
 export class CrDashboardComponent implements OnInit {
   constructor(private router:Router){}
-  allocatedResources:any[] = [];
+
   ngOnInit(): void {
     
   }
-  sendRequestForKey(){
-    this.router.navigate(["key/borrow"])
+  generateqrcode(){
+    this.router.navigate(['cr/generateqrcode']);
   }
-  sendRequestForCycle(){
-    this.router.navigate(["cycles/borrow"])
+  fun1()
+  {
+    this.router.navigate(['cr/classwise']);
   }
-  returnKey(){
-    this.router.navigate(["key/return"])
-  }
-  returnCycle(){
-    this.router.navigate(["cycles/return"])
-  }
-  viewRequests(){
-    this.router.navigate(["cr/requests"])
+  fun2()
+  {
+    this.router.navigate(['cr/shortages']);
   }
 }

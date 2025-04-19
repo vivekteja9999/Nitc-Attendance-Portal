@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavbarLoggedComponent } from "../../navbar_loggedin/navbar_loggedin.component";
-import { CycleService } from '../cycle.service';
+import { CycleService } from './cycle.service';
 import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
 @Component({

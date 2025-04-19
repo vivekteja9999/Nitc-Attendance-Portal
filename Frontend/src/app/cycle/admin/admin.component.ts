@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WebSocketService } from '../../util/websocket.service';
-import { NavbarLoggedComponent } from '../../navbar_loggedin/navbar_loggedin.component';
+import { WebSocketService } from '../../../util/websocket.service';
+import { NavbarLoggedComponent } from '../../../navbar_loggedin/navbar_loggedin.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
